@@ -1,7 +1,7 @@
 ---
 title: Nial Documentation
 permalink: /ndocs/
-
+layout: single
 ---
 
 The following items provide a complete description of the Nial language and its builtin functions/operators
