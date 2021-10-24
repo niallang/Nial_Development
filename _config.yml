@@ -156,6 +156,7 @@ include:
   - .htaccess
   - _pages
   - ndocs
+  - _posts
   
 exclude:
   - "*.sublime-project"
