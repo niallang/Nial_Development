@@ -1,5 +1,7 @@
 ---
 title: The Nial Language Manual
+permalink: /ndocs/
+layout: single
 ---
 
 # The Language Definition
