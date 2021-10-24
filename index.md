@@ -2,7 +2,5 @@
 layout: home
 ---
 
-# Nial
-
-Some blurb here
+Welcome to the Nial language website.
 
