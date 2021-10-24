@@ -943,6 +943,7 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
 .page .page__inner-wrap .page__content, .page .page__inner-wrap .page__meta, .page .page__inner-wrap .comment__date, .page .page__inner-wrap .page__share { position: relative; float: left; margin-left: 0; margin-right: 0; width: 100%; clear: both; }
 
 .page__title { margin-top: 0; line-height: 1; }
+.page__title a { color: #3d4144; text-decoration: none; }
 .page__title + .page__meta, .page__title + .comment__date { margin-top: -0.5em; }
 
 .page__lead { font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif; font-size: 1.25em; }
@@ -1178,7 +1179,8 @@ body { display: -webkit-box; display: -ms-flexbox; display: flex; min-height: 10
 .sidebar__right { margin-bottom: 1em; }
 @media (min-width: 64em) { .sidebar__right { position: absolute; top: 0; right: 0; width: 200px; margin-right: -200px; padding-left: 1em; z-index: 10; }
   .sidebar__right.sticky { clear: both; position: -webkit-sticky; position: sticky; top: 2em; float: right; }
-  .sidebar__right.sticky::after { clear: both; content: ""; display: table; } }
+  .sidebar__right.sticky::after { clear: both; content: ""; display: table; }
+  .sidebar__right.sticky .toc .toc__menu { overflow-y: auto; max-height: calc(100vh - 7em); } }
 @media (min-width: 80em) { .sidebar__right { width: 300px; margin-right: -300px; } }
 
 @media (min-width: 64em) { .splash .sidebar__right { position: relative; float: right; margin-right: 0; } }
