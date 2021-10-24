@@ -1,6 +1,6 @@
 ---
 title: The Nial Language Manual
-permalink: /ndocs/
+permalink: /ndocs/lang/
 layout: single
 ---
 
