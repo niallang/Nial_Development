@@ -1,5 +1,8 @@
 ---
 layout: home
+header:
+  overlay_image: /assets/images/Nial2.png
+  overlay_filter: 0.5
 ---
 
 Welcome to the Nial language website.
