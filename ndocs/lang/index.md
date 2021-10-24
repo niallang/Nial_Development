@@ -2,6 +2,7 @@
 title: The Nial Language Manual
 permalink: /ndocs/lang/
 layout: single
+toc: true
 ---
 
 # The Language Definition
