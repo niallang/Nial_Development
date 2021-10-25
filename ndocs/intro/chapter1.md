@@ -1,5 +1,6 @@
 ---
-title: Getting Started - Nial Introduction, Chapter 1 
+title: Getting Started - Nial Introduction, Chapter 1
+layout: single
 ---
 
 

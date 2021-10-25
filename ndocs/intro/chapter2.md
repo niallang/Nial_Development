@@ -1,5 +1,6 @@
 ---
 title: An Overview of Nial - Nial Introduction, Chapter 2
+layout: single
 ---
 
 

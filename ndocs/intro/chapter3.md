@@ -1,5 +1,6 @@
 ---
 title: A Data Manipulation Language - Nial Introduction, Chapter 3
+layout: single
 ---
 
 
