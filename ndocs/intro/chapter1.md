@@ -1,5 +1,6 @@
 ---
 title: "Getting Started - Nial Introduction, Chapter 1"
+permalink: /ndocs/intro/chapter1/
 layout: single
 ---
 
