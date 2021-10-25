@@ -1,5 +1,5 @@
 ---
-title: "Getting Started - Nial Introduction, Chapter 1"
+title: Getting Started
 permalink: /ndocs/intro/chapter1/
 layout: single
 ---
