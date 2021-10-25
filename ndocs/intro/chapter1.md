@@ -6,6 +6,7 @@ layout: single
 
 
 # Getting Started
+
 ### Chapter 1
 
 - [A First Session](#a-first-session)
