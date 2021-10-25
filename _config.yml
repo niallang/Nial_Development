@@ -292,3 +292,10 @@ defaults:
       comments: # true
       share: true
       related: true
+  # pages
+  - scope
+      path: ""
+      type: pages
+    values:
+      layout: single
+
