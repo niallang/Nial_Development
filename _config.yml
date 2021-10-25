@@ -293,7 +293,6 @@ defaults:
       related: true
   # pages
   - scope
-      path: ""
       type: pages
     values:
       layout: single
