@@ -1,10 +1,10 @@
 ---
 title: Host System Interface - Nial Introduction, Chapter 6
+layout: single
 ---
 
 
 # Host System Interface
-### Chapter 6
 
 - [Use of Files](#use-of-files)
 - [Interpreter Mechanisms](#interpreter-mechanisms)

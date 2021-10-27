@@ -1,0 +1,686 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Problem Solving with Nial - Nial Introduction, Chapter 5 - Nial Array Language Website</title>
+<meta name="description" content="Nial Community Site">
+
+
+  <meta name="author" content="John Gibbons">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Nial Array Language Website">
+<meta property="og:title" content="Problem Solving with Nial - Nial Introduction, Chapter 5">
+<meta property="og:url" content="http://localhost:4000/ndocs/intro/chapter5.html">
+
+
+  <meta property="og:description" content="Nial Community Site">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/ndocs/intro/chapter5.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "John Gibbons",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Nial Array Language Website Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/NialLogo.jpg" alt="Nial Array Language Website"></a>
+        
+        <a class="site-title" href="/">
+          Nial Array Language Website
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/ndocs/">Documentation</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/ndocs" itemprop="item"><span itemprop="name">Ndocs</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/intro" itemprop="item"><span itemprop="name">Intro</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Problem Solving with Nial - Nial Introduction, Chapter 5</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Problem Solving with Nial - Nial Introduction, Chapter 5">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="http://localhost:4000/ndocs/intro/chapter5.html" class="u-url" itemprop="url">Problem Solving with Nial - Nial Introduction, Chapter 5
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h1 id="problem-solving-with-nial">Problem Solving with Nial</h1>
+
+<ul>
+  <li><a href="#the-problem">The Problem</a></li>
+  <li><a href="#testing-for-a-path">Testing for a Path</a></li>
+  <li><a href="#returning-the-path-found">Returning the Path Found</a></li>
+  <li><a href="#finding-paths-in-a-cyclic-graph">Finding Paths in a Cyclic Graph</a></li>
+</ul>
+
+<p>Q’Nial provides an interactive environment for experimenting while
+trying to solve a problem. The interactive approach allows thinking
+about the problem by trying steps towards a solution.</p>
+
+<p>This chapter consists of a log of an interactive session used to explore
+a problem in graph theory. The recording of the log is started using</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set "log ;
+</code></pre></div></div>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>Consider a directed graph consisting of nodes a, b, … and edges that
+indicate a directed link between some of the nodes. For example,
+consider the following graph:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                  +---+
+   +--------&gt;-----| b |
+   |              +---+
+   |
+ +---+      +---+     +---+     +---+
+ | a |---&gt;--| c |--&gt;--| g |--&gt;--| k |
+ +---+      +---+     +---+     +---+
+                                  |
+ +---+                +---+       |
+ | d |------------&gt;---| e |---&gt;---+
+ +---+                +---+
+</code></pre></div></div>
+
+<p>One way to represent the graph is to provide a list of edges in which
+each edge is a pair of nodes indicating a link from the first node to
+the second.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Edges := ("a "b) ("a "c) ("c "g) ("g "k) ("d "e) ("e "k)
+
++-----------------------+
+|a b|a c|c g|g k|d e|e k|
++-----------------------+
+</code></pre></div></div>
+
+<p>This array describes the graph completely.</p>
+
+<p>Suppose the requirement is to write an operation that, given an edgelist
+for a graph and two nodes Node1 and Node2, determines whether or not
+there exists a path from Node1 to Node2 along the links in the graph.
+Visual inspection of the example graph reveals that there exists a path
+from a to k but not one from b to d. The task is to determine how to
+test this finding computationally.</p>
+
+<h2 id="testing-for-a-path">Testing for a Path</h2>
+
+<p>We begin experimenting by looking for the path from a to k. First, look
+for all the links that start at a.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     EACH first Edge
+     
+a a c g d e
+
+     EACH first Edges = "a
+o
+</code></pre></div></div>
+
+<p>Using <em>equal</em> returns only a single result. Try <em>match</em>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     EACH first Edges match "a
+     
+lloooo
+</code></pre></div></div>
+
+<p>This gives a bitstring, a string of booleans, that can be used with
+<em>sublist</em> to extract the desired links.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Lnksfrm_a := EACH first Edges match "a sublist Edges
+    
++-------+
+|a b|a c|
++-------+
+</code></pre></div></div>
+
+<p>Then, test whether or not a direct path to k has been found.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     "k in EACH second Lnksfrm_a
+     
+o
+</code></pre></div></div>
+
+<p>The answer is negative. Now repeat the process to see if there is a link
+through b or c.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Lnksfrm_b := EACH first Edges match "b sublist Edges
+     
+     Lnksfrm_c := EACH first Edges match "c sublist Edges
+     
++---+
+|c g|
++---+
+</code></pre></div></div>
+
+<p>There are no links found from b and only one from c. Test to see if the
+link from c completes a path.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     "k in EACH second Lnksfrm_c
+     
+o
+</code></pre></div></div>
+
+<p>The result is negative so the process is repeated on the node to which c
+links.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Lnksfrm_g := EACH first Edges match "g sublist Edges
+     
++---+
+|g k|
++---+
+
+
+     "k in EACH second Lnksfrm_g
+     
+l
+</code></pre></div></div>
+
+<p>A path has been found. This exploration indicates that a path test can
+be written in this style. It will have two parts: a test to see if a
+direct link occurs or the use of a loop to find whether or not one of
+the links leads to a path.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pathtest is OP Edges Node1 Node2 {
+  Lnksfrm_node1 := EACH first Edges match Node1 sublist Edges;
+  IF Node2 in EACH second Lnksfrm_Node1 THEN
+    % direct path Node1 to Node2;
+    True
+  ELSE
+    % loop through linked nodes to see if a path to Node2 exists;
+    Linkednodes := EACH second Lnksfrm_node1;
+    Found := False;
+    I := 0;
+    WHILE not Found and (I &lt; tally Linked nodes) DO
+      Node := Linkednodes@I;
+      Lnksfrm_node := EACH first Edges match Node sublist Edges;
+      Found := Node2 in EACH second Lnksfrm_Node;
+      I := I + 1;
+    ENDWHILE;
+    Found
+  ENDIF }
+  
+
+     pathtest Edges "a "k
+o
+</code></pre></div></div>
+
+<p>The test of this version shows that the algorithm fails.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     pathtest Edges "a "b
+l
+
+
+     pathtest Edges "a "c
+l
+
+
+     pathtest Edges "a "g
+l
+</code></pre></div></div>
+
+<p>Further testing shows that the algorithm is close to working. It finds a
+path over two links but not over three. The problem is apparently in the
+loop that looks for a path from a node in the list of linked nodes.</p>
+
+<p>Instead of trying to test for a path directly, it is necessary to call
+the routine recursively to get the path test to go down an arbitrary
+number of links.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pathtest is OP Edges Node1 Node2 {
+  Lnksfrm_node1 := EACH first Edges match Node1 sublist Edges;
+  IF Node2 in EACH second Lnksfrm_Node1 THEN
+    % direct path from Node1 to Node2;
+    True
+  ELSE
+    % loop through linked nodes to see if a path to Node2 exists;
+    Linkednodes := EACH second Lnksfrm_node1;
+    Found := False;
+    I := 0;
+    WHILE not Found and (I &lt; tally Linked nodes) DO
+      Found := pathtest Edges Linkednodes@I Node2;
+      I := I + 1;
+    ENDWHILE;
+    Found
+  ENDIF }
+
+     pathtest Edges "a "k
+l
+
+
+     pathtest Edges "b "d
+o
+</code></pre></div></div>
+
+<p>The operation has succeeded.</p>
+
+<h2 id="returning-the-path-found">Returning the Path Found</h2>
+
+<p>An alternative solution would be to return the path if one is found.
+This is only a minor change in the algorithm. Instead of returning a
+boolean value in the direct test, the link would be returned. In the
+loop, an empty path would be set and it would be replaced by a found
+path in the loop. The first attempt is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>findpath is OP Edges Node1 Node2 {
+  Lnksfrm_node1 := EACH first Edges match Node1 sublist Edges;
+  IF Node2 in EACH second Lnksfrm_node1 THEN
+    % direct path from Node1 to Node2;
+    Node1 Node2
+  ELSE
+    % loop through linked nodes to see if a path to Node2 exists;
+    Linkednodes := EACH second Lnksfrm_node1;
+    Foundpath := Null;
+    I := 0;
+    WHILE empty Foundpath and (I &lt; tally Linkednodes) DO
+      Foundpath := findpath Edges Linkednodes@I Node2;
+      IF not empty Foundpath THEN
+         Foundpath := Linkednodes@I hitch Foundpath;
+      ENDIF;
+      I := I + 1;
+    ENDWHILE;
+    Foundpath
+  ENDIF }
+  
+
+     findpath Edges "a "c
+ a c
+     findpath Edges "a "k
+ c g g k
+</code></pre></div></div>
+
+<p>The operation works on a direct link but has a missing node and a
+repetition in a path of length four. The problem is caused by the path
+computation after the recursion has returned a path. It should be Node1
+rather than the linked node that is added to the path.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>findpath is OP Edges Node1 Node2 {
+  Lnksfrm_node1 := EACH first Edges match Node1 sublist Edges;
+  IF Node2 in EACH second Lnksfrm_Node1 THEN
+    % direct path from Node1 to Node2;
+    Node1 Node2
+  ELSE
+    % loop through linked nodes to see if a path to Node2 exists;
+    Linkednodes := EACH second Lnksfrm_node1;
+    Foundpath := Null;
+    I := 0;
+    WHILE empty Foundpath and (I &lt; tally Linkednodes) DO
+      Foundpath := findpath Edges Linkednodes@I Node2;
+      I := I + 1;
+    ENDWHILE;
+    IF not empty Foundpath THEN
+      Foundpath := Node1 hitch Foundpath;
+    ENDIF;
+    Foundpath
+  ENDIF }
+  
+
+     findpath Edges "a "k
+a c g k
+</code></pre></div></div>
+
+<h2 id="finding-paths-in-a-cyclic-graph">Finding Paths in a Cyclic Graph</h2>
+
+<p>Now consider the situation where a graph has more than one path between
+two nodes. It may be desirable to compute all the paths between nodes.
+Consider the graph which is the same as the previous one except that it
+adds a link from a to d.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Edges:=("a "b)("a "c)("c "g)("g "k)("d "e)("e "k)("a "d)
++---------------------------+
+|a b|a c|c g|g k|d e|e k|a d|
++---------------------------+
+</code></pre></div></div>
+
+<p>The modification needed is twofold. On a direct link, the result must be
+returned as a solitary list holding the direct link to indicate one
+existing path. For the linked nodes, the loop has to be changed to check
+all of the nodes for paths and these have to be combined to give the
+list of all paths.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>findpaths is OP Edges Node1 Node2 {
+  Lnksfrm_node1 := EACH first Edges match Node1 sublist Edges;
+  IF Node2 in EACH second Lnksfrm_Node1 THEN 
+    % there is a direct path from Node1 to Node2;
+    Paths := [ Node1 Node2 ];
+  ELSE
+    Paths := Null;
+  ENDIF;
+  % loop through linked nodes to add any additional paths;
+  Linkednodes := EACH second Lnksfrm_node1;
+  FOR Node WITH Linkednodes except [Node2] DO 
+    Newpaths := findpaths Edges Node Node2;
+    Paths := Paths link (Node1 EACHRIGHT hitch Newpaths);
+  ENDFOR;
+  Paths }
+  
+
+     findpaths Edges "a "k
++---------------+
+|a c g k|a d e k|
++---------------+
+</code></pre></div></div>
+
+<p>The algorithm worked on the first attempt.</p>
+
+<p>The limits of the algorithm can be explored. Consider the test:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Cyclic_graph := ("a "b)("b "c)("b "d)("c "a)
++---------------+
+|a b|b c|b d|c a|
++---------------+
+
+
+     findpath Cyclic_graph "a "d
+system warning: C stack overflow
+</code></pre></div></div>
+
+<p>The algorithm fails with a stack overflow. The problem is caused by the
+recursion going around the cycle in the graph until the internal stack
+in Q’Nial runs out of space. The algorithm has an implicit assumption
+that the chains of links will all terminate. The assumption would be
+valid if it is known that the directed graph does not have cycles (i.e.
+it is acyclic). To make the algorithm work in the general case, it needs
+to be altered to avoid cycles. The approach is to add a fourth parameter
+that records the nodes that have been encountered in pursuing a path and
+to use it to avoid a recursion that cycles.</p>
+
+<p>The expression calling <em>findpaths</em> uses Null as the initial value for the
+new parameter Encountered. Encountered is a list which is extended when
+a new node is considered. The list is used to remove can didates from
+the list of linked nodes that have already been processed.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>findpaths is OPERATION Edges Node1 Node2 Encountered {
+  Lnksfrm_node1 := EACH first Edges match Node1 sublist Edges;
+  IF Node2 in EACH second Lnksfrm_Node1 THEN
+    % direct path from Node1 to Node2;
+    Paths := [ Node1 Node2 ];
+  ELSE
+    Paths := Null;
+  ENDIF;
+  Encountered := Encountered append Node1;
+  % loop through linked nodes not encountered to add paths ;
+  Linkednodes :=EACH second Lnksfrm_node1 except Encountered;
+  FOR Node WITH Linkednodes except [Node2] DO
+    Newpaths := findpaths Edges Node Node2 Encountered;
+    Paths := Paths link (Node1 EACHRIGHT hitch Newpaths)
+  ENDFOR }
+  
+ 
+     findpaths Cyclic_graph "a "d Null
++-----+
+|a b d|
++-----+
+</code></pre></div></div>
+
+<p>Exploring directed graph computations could continue in other ways. For
+example, the use of Edges is only one way to represent a graph. Another
+is to use a boolean table where a true in row i and column j indicates
+that there is a link between nodes i and j. With this representation, a
+correspondence between the node names and the indices is maintained.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 John Gibbons. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

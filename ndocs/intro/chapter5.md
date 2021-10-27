@@ -1,10 +1,10 @@
 ---
 title: Problem Solving with Nial - Nial Introduction, Chapter 5
+layout: single
 ---
 
 
 # Problem Solving with Nial
-### Chapter 5
 
 - [The Problem](#the-problem)
 - [Testing for a Path](#testing-for-a-path)

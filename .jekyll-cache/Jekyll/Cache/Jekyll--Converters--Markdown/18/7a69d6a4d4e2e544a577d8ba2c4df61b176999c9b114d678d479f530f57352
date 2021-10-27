@@ -1,0 +1,424 @@
+I"�B<h1 id="chapter-2">Chapter 2</h1>
+
+<ul>
+  <li><a href="#the-data-objects">The Data Objects</a></li>
+</ul>
+
+<p>Nial is based on a mathematical treatment of array data structures,
+informally called array theory, and on standard features borrowed from
+other programming languages. Thus, it combines a mathematical approach
+to the treatment of data with well understood programming concepts.
+These capabilities are presented in an interactive environment driven by
+the Q’Nial interpreter. Nial is ideal for exploratory or experi mental
+computing, but can also be used effectively for doing intensive
+computations involving large data sets.</p>
+
+<p>The concept of program development in a conventional compiled language
+does not apply to Nial. In Nial, the unit of translation is an action
+which either defines a new functional object to be held in the workspace
+or describes a data object to be computed in the form of an array
+expression. The latter may assign the data object to a variable
+retaining the data object in the workspace. A session consists of a
+sequence of interactions with the pro grammer or user in which actions
+are entered. As the session proceeds, definitions and variables are
+collected in the active workspace. The meaning of an action is
+determined by definitions and vari ables already processed.</p>
+
+<p>The operation <em>loaddefs</em> can be used as an action that processes several
+other actions stored in a file. A program in the conventional sense can
+be created as one large definition in a file and then loaded and invoked
+using <em>loaddefs</em>; but such an approach ignores the advantages of being
+able to work in a combination of textual definition and direct
+interaction. Loaddefs may be used to bring in a single definition or a
+set of definitions prepared using an editor and can call itself
+recursively.</p>
+
+<h2 id="the-data-objects">The Data Objects</h2>
+
+<p>All data objects in Nial are considered to be array data structures. An
+array is a collection of data objects organized along axes. The most
+frequently used structure is the list which has only one axis. A string
+is a list of characters.</p>
+
+<p>Any collection of data objects can be stored in a list; there is no
+requirement that all the items have the same type. Thus, record types in
+Pascal or structs in C can be represented in Nial as lists.</p>
+
+<p>Consider the following examples of lists displayed in diagram mode. A
+list of characters:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     'hello world'
+    
++---------------------+
+|h|e|l|l|o| |w|o|r|l|d|
++---------------------+
+</code></pre></div></div>
+
+<p>A list of numbers created by the operation count which returns the list
+of integers starting at 1:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     count 12
+     
++--------------------------+
+|1|2|3|4|5|6|7|8|9|10|11|12|
++--------------------------+
+</code></pre></div></div>
+
+<p>A list of two items of different type:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     "age 23
+     
++------+
+|age|23|
++------+
+</code></pre></div></div>
+
+<p>A list of two items, each of which is a list of items:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     (count 5) 'hello'
+     
++-----------------------+
+|+---------+|+---------+|
+||1|2|3|4|5|||h|e|l|l|o||
+|+---------+|+---------+|
++-----------------------+
+</code></pre></div></div>
+
+<p>Arrays can nest within other arrays. The above example is easier to
+comprehend when the boxes of the innermost lists are omitted as in the
+example below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     set "sketch; (count 5) 'hello'
+     
++---------------+
+|1 2 3 4 5|hello|
++---------------+
+</code></pre></div></div>
+
+<p>An array with two dimensions is called a table. Tables are convenient
+data structures in which to store character information that is to be
+displayed on a computer screen; or numeric data that represents a matrix
+in a scientific computation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     set "diagram; T gets 3 4 reshape count 12
+     
++----------+
+|1| 2| 3| 4|
++-+--+--+--|
+|5| 6| 7| 8|
++-+--+--+--|
+|9|10|11|12|
++----------+
+
+
+     set "sketch; T
+     
+1  2  3  4
+5  6  7  8
+9 10 11 12
+</code></pre></div></div>
+
+<p>A table is built using the operation <em>reshape</em> with first argument giving
+the number of rows and columns and the second the list of items. T is a
+3 by 4 table. In diagram mode, a table is boxed. In sketch mode, if all
+the items are atomic, the boxing is omitted. An array having all atomic
+items is said to be simple.</p>
+
+<p>There are many operations that manipulate tables in Nial.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     transpose T
+     
+1 5  9
+2 6 10
+3 7 11
+4 8 12
+
+   
+     rows T
+     
++--------------------------+
+|1 2 3 4|5 6 7 8|9 10 11 12|
++--------------------------+
+
+   
+     cols T
+     
++--------------------------+
+|1 5 9|2 6 10|3 7 11|4 8 12|
++--------------------------+
+</code></pre></div></div>
+
+<p>The rows of T and the columns of T are related by the operation <em>pack</em>,
+which interchanges the levels of a list of lists. The operation <em>mix</em> can
+be used to convert a list of lists to a table:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     pack rows T
+     
++--------------------------+
+|1 5 9|2 6 10|3 7 11|4 8 12|
++--------------------------+
+
+
+     mix rows T
+     
+1  2  3  4
+5  6  7  8
+9 10 11 12
+
+
+     mix cols T
+     
+1 5  9
+2 6 10
+3 7 11
+4 8 12
+</code></pre></div></div>
+
+<p>Higher dimensional arrays are sometimes used in three dimensional
+modelling. A three dimensional array can be created using <em>reshape</em>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     A gets 2 3 4 reshape count 24
+     
+1  2  3  4   13 14 15 16
+5  6  7  8   17 18 19 20
+9 10 11 12   21 22 23 24
+</code></pre></div></div>
+
+<p>The array A is a 2 by 3 by 4 array of the first 24 integers counting
+from one.</p>
+
+<p>The operation <em>raise</em> can be used to partition a higher dimensional array
+into an array of lower dimensional ones:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     List_of_tables gets 1 raise A
+
++----------------------+
+|1  2  3  4|13 14 15 16|
+|5  6  7  8|17 18 19 20|
+|9 10 11 12|21 22 23 24|
++----------------------+
+
+
+     Table_of_lists gets 2 raise A
+
++-----------------------------------+
+|1  2   3  4| 5  6  7  8|9 10 11 12 |
++-----------+-----------+-----------|
+|13 14 15 16|17 18 19 20|21 22 23 24|
++-----------------------------------+
+</code></pre></div></div>
+
+<p>List_of_tables is a list of two 3 by 4 tables. Table_of_lists is a
+2 by 3 table of lists of length four. In the following example, the
+operation <em>reverse</em> is used directly on List_of_tables giving
+Rev_tables. The items of List_of_tables can be reversed by modifying
+the operation <em>reverse</em> using <em>EACH</em>. In these examples, <em>gets</em> is replaced by
+the symbol <em>:=</em> which is an alternative notation for assignment.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Rev_tables := reverse List_of_tables
+     
+ +----------------------+
+ |13 14 15 16|1  2  3  4|
+ |17 18 19 20|5  6  7  8|
+ |21 22 23 24|9 10 11 12|
+ +----------------------+
+ 
+
+
+     Rev_tables_items := EACH reverse List_of_tables
+     
++----------------------+
+|12 11 10 9|24 23 22 21|
+| 8  7  6 5|20 19 18 17|
+| 4  3  2 1|16 15 14 13|
++----------------------+
+</code></pre></div></div>
+
+<p>The effect of a <em>raise</em> can be undone using <em>mix</em>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     mix List_of_tables
+     
+1  2  3  4   13 14 15 16
+5  6  7  8   17 18 19 20
+9 10 11 12   21 22 23 24
+</code></pre></div></div>
+
+<p>For mathematical completeness, atomic data objects (also called atomic
+arrays) such as booleans, integers, characters and real numbers are
+treated as arrays with no axes and are viewed as self containing. The
+effect of the latter choice is that the operation <em>first</em> used on an atom
+returns the atom.</p>
+
+<p>Nial has two additional atomic types not found in conventional
+languages: phrases and faults. A phrase is an atomic unit of literal
+data. Every phrase cor responds to a string but the internal structure
+is concealed so that the character data cannot be directly accessed. The
+string content can be retrieved using the conversion operation <em>string</em>.
+Q’Nial stores phrases uniquely, that is, only one copy of each phrase in
+use is kept in the workspace. This choice allows a phrase to be
+represented as an integer that points to the content internally. The use
+of a unique representation results in efficient equality comparisons
+and copying of phrase data.</p>
+
+<p>Faults are similar to phrases but are used to denote special values or
+error conditions. Faults that report errors cause an interrupt of the
+current execution when they are created unless the default behaviour of
+Q’Nial for fault triggering has been modified. The special value faults
+such as <em>?noexpr</em> and <em>?eof</em> behave like phrases except that they can be
+tested using the test <em>isfault</em>.</p>
+
+<p>As an illustration of the use of Nial data objects and some of the data
+manipulation capabilities in Nial, consider the requirement to display a
+table of data with appropriate labels on the rows and columns and an
+overall label. Given the data table:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Data
+     
+23 34 12
+38 18 26
+37 13 42
+</code></pre></div></div>
+
+<p>produce the following display as a table for a report:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crop Yields Oats Rice Corn
+None          23   34   12
+Arsenic       38   18   26
+Old Lace      37   13   42
+</code></pre></div></div>
+
+<p>The operation <em>labeltable</em>, defined in the Nial library, can be used for
+this purpose.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     library "labeltab; see "labeltable
+     
+labeltable IS OPERATION Corner Rowlabel Columnlabel Table {
+  % Combine the labels ;
+  Firstrow := Corner hitch Columnlabel ;
+  % Hitch labels to the rows ;
+  Labelledrows := Rowlabel EACHBOTH hitch rows Table ;
+  % Hitch labels to the rows and mix ;
+  mix ( Firstrow hitch Labelledrows ) }
+</code></pre></div></div>
+
+<p>First the data objects required for applying the opera tion are
+prepared:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Data := 3 3 reshape 23 34 12 38 18 26 37 13 42 ;
+     Corner := phrase 'Crop Yields' ;
+     Collab := "Oats "Rice "Corn ;
+     Rowlab := EACH phrase 'None' 'Ar senic' 'Old Lace' ;
+</code></pre></div></div>
+
+<p>To do this, the table data is entered as a list and reshaped. The label
+information is specified as phrases, one for each row and column of the
+data and one for the corner. The operation <em>phrase</em> is used to create a
+phrase with embedded blanks for the corner. The transformer <em>EACH</em> is used
+with <em>phrase</em> to build the row labels that also include blanks. Then the
+operation <em>labeltable</em> is applied to the list of arguments yielding the
+desired result:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    labeltable Corner Rowlab Collab Data
+    
+Crop Yields Oats Rice Corn
+None          23   34   12
+Arsenic       38   18   26
+Old Lace      37   13   42
+</code></pre></div></div>
+
+<p><em>Labeltable</em> is defined as an operation form, consisting of a header</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     OPERATION Corner Rowlabels Column labels Table
+</code></pre></div></div>
+
+<p>and a body which is a block marked off by { and }. The block is a
+sequence of six expressions separated by semicolons. The expressions
+beginning with % are comments. The operation is called by the action:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     labeltable Corner Rowlab Collab Data
+</code></pre></div></div>
+
+<p>The action is evaluated in two steps. First, the actual argument
+provided in the call (in this case, a list of 4 arrays) is assigned to
+the formal parameters in the header. Then, the block forming the body of
+the operation form is evaluated. This second step involves executing the
+expressions in the block in order. The result of the execution of the
+operation is the value of the last expression.</p>
+
+<p>The details of the execution of the block are as follows. The
+expression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Firstrow := Corner hitch Columnlabels
+</code></pre></div></div>
+
+<p>attaches the value in <em>Corner</em> to the list in <em>Collab</em> to give the local
+variable <em>Firstrow</em> the value</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crop Yields Oats Rice Corn
+</code></pre></div></div>
+
+<p>The expression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Labelledrows := Rowlabels EACHBOTH hitch rows Table ;
+</code></pre></div></div>
+
+<p>uses <em>hitch</em> modified by <em>EACHBOTH</em> to place the row labels on the
+corresponding rows of the data table to give the local variable
+<em>Labelledrows</em> the value</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+------------------------------------------------+
+|None 23 34 12|Arsenic 38 18 26|Old Lace 37 13 42|
++------------------------------------------------+
+</code></pre></div></div>
+
+<p>The subexpression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     Firstrow hitch Labelledrows
++---------------------------------------------------------------------------+
+|Crop Yields Oats Rice Corn|None 23 34 12|Arsenic 38 18 26|Old Lace 37 13 42|
++---------------------------------------------------------------------------+
+</code></pre></div></div>
+
+<p>extends the list of labelled rows by placing the first row on the front.</p>
+
+<p>The final expression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     mix ( Firstrow hitch Labelledrows )
+</code></pre></div></div>
+
+<p>uses operation <em>mix</em> to convert the list of lists holding the rows of the
+result to the desired table:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crop Yields Oats Rice Corn
+None          23   34   12
+Arsenic       38   18   26
+Old Lace      37   13   42
+</code></pre></div></div>
+
+<p>Notice that there is no programming required to get the output displayed
+in a tidy rectangular arrangement. The array display mechanism
+automatically lines up columns using left justification for textual
+fields and right justification for numeric fields.</p>
+
+<p>The example illustrates the use of data manipulation operations. The
+local variables (local by default) <em>Firstrow</em> and <em>Labelledrows</em> hold
+inter mediate values that are used only once in the subsequent lines.
+They serve as useful names for intermediate results and make the
+operation more easily understood. An equivalent operation could be
+defined as</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lab IS OP Co Rl Cl T { mix ((Co hitch Cl) hitch (Rl EACHBOTH hitch rows T)) }
+</code></pre></div></div>
+
+<p>However, such a cryptic definition is more difficult to understand since
+the use of abbreviated names for the parameters and the defined
+operation make the purpose of the definition obscure, and the long
+single expression requires careful analysis to comprehend.</p>
+
+<p>The illustration of how to display a table of data demonstrates the two
+major programming components of Nial: data objects are manipulated by an
+expres sion sublanguage that uses many predefined high level functions,
+and expressions in the sublanguage are combined using control mechanisms
+such as assignment, sequencing and function definition to provide a high
+level mechanism for rapid programming.</p>
+:ET

@@ -1,11 +1,10 @@
 ---
-title: An Overview of Nial - Nial Introduction, Chapter 2
+title: An Overview of Nial - Chapter 2
 layout: single
 ---
 
 
 # An Overview of Nial
-### Chapter 2
 
 - [The Data Objects](#the-data-objects)
 

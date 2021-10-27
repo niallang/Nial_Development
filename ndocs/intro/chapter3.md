@@ -1,12 +1,10 @@
 ---
 title: A Data Manipulation Language - Nial Introduction, Chapter 3
-permalink: /ndocs/intro/
 layout: single
 ---
 
 
 # A Data Manipulation Language
-### Chapter 3
 
 - [Functional Objects](#functional-objects)
 - [Bracket Notation](#bracket-notation)

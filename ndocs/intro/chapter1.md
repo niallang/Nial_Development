@@ -1,13 +1,10 @@
 ---
 title: Getting Started
-permalink: /ndocs/intro/chapter1/
 layout: single
 ---
 
 
-# Getting Started
-
-### Chapter 1
+# Chapter 1
 
 - [A First Session](#a-first-session)
 - [Some Differences with Other Languages](#some-differences-with-other-languages)

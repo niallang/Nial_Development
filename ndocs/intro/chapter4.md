@@ -1,10 +1,10 @@
 ---
 title: Language Mechanisms - Nial Introduction, Chapter 4
+layout: single
 ---
 
 
 # Language Mechanisms
-### Chapter 4
 
 - [Assignment Expressions](#assignment-expressions)
 - [Selector Expressions](#selector-expressions)

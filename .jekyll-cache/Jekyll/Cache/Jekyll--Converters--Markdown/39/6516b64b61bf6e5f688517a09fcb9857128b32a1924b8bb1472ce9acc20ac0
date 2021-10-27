@@ -1,0 +1,36 @@
+I"<h1 id="preface">Preface</h1>
+
+<p>This Introduction to Q’Nial is a quick guide on how to use Nial. It is
+intended for people with some experience in programming languages such
+as Pascal, C, Fortran or Turing. Concepts similar to one in those
+languages are described, but the main focus of the text is to explain
+the novel aspects of Nial programming. The guide provides suggestions
+on how to use the features of Q’Nial effectively.</p>
+
+<p>The information is presented in six chapters.</p>
+
+<p><a href="chapter1.html"><strong><em>Chapter 1</em></strong></a> shows a first session, explains some differences with other
+languages and shows how to define an operation.</p>
+
+<p><a href="chapter2.html"><strong><em>Chapter 2</em></strong></a> provides an overview of Nial regarding data objects and
+introduces operations.</p>
+
+<p><a href="chapter3.html"><strong><em>Chapter 3</em></strong></a> describes data manipulation by functional objects,
+operations and transformers. It shows how various rules in Nial are used
+in the derivation of a result of an expression and explains brackets
+notation and indexing.</p>
+
+<p><a href="chapter4.html"><strong><em>Chapter 4</em></strong></a> describes several types of expressions and expression
+sequences and explains how to define a parameterized operation and a
+transformer.</p>
+
+<p><a href="chapter5.html"><strong><em>Chapter 5</em></strong></a> is an extended session showing how to solve a problem from
+graph theory using Nial.</p>
+
+<p><a href="chapter6.html"><strong><em>Chapter 6</em></strong></a> provides an overview of the Host System interface and
+describes some of the mechanisms of the Q’Nial interpreter that are
+available for direct use.</p>
+
+<p>It is a good idea to experiment with Q’Nial as you read the material in
+the Introduction to Q’Nial.</p>
+:ET
