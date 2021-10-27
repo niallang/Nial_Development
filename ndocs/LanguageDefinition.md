@@ -1,6 +1,7 @@
 ---
 title: The Nial Language Manual
 layout: single
+toc: true
 ---
 
 # The Language Definition
