@@ -1,6 +1,7 @@
 ---
 title: An Overview of Nial - Chapter 2
 layout: single
+classes: wide
 ---
 
 

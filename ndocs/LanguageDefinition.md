@@ -1,7 +1,8 @@
 ---
 title: The Nial Language Manual
 layout: single
-sidebar: toc
+toc: true
+classes: wide
 ---
 
 # The Language Definition
@@ -1782,10 +1783,10 @@ An **action** is the construct that is entered in the interactive
 loop of the Q'Nial interpreter or accepted as a group of lines by
 the operation *loaddefs*:
 
-|    *\<action\>* ::= *\<definition-sequence\>*
-|             \| *\<expression-sequence\>*
-|             \| *\<external-declaration\>*
-|             \| *\<remark\>*
+    <action> ::= <definition-sequence>
+              | <expression-sequence>
+              | <external-declaration\>
+              | <remark>
 
 If an action is a *\<definition-sequence\>*, its definitions are installed
 in the global environment.
@@ -1802,11 +1803,11 @@ A *\<remark\>* is treated as commentary input and is ignored.
 
 ## Definition
 
-|    *\<definition-sequence\>* ::= *\<definition\>* \{**\;** *\<definition\>* \} \[**\;**\]
-|    
-|    *\<definition\>* ::= *\<identifier\>* **IS**
-|                     ( *\<simple-expression\>* | *\<operation-expression\>* | *\<transformer-expression\>* )
-|                    \| *\<comment\>*
+    <definition-sequence> ::= <definition> {; <definition>}* [;]
+   
+    *\<definition\>* ::= *\<identifier\>* **IS**
+                     ( *\<simple-expression\>* | *\<operation-expression\>* | *\<transformer-expression\>* )
+                    \| *\<comment\>*
 
 Every well formed program fragment that can appear on the right of
 the keyword **IS** in a definition is interpreted to be one of the

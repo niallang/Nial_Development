@@ -1,6 +1,7 @@
 ---
 title: Problem Solving with Nial - Nial Introduction, Chapter 5
 layout: single
+classes: wide
 ---
 
 

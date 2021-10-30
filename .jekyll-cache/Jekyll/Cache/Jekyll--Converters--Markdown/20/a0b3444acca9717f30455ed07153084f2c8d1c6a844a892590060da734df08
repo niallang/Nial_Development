@@ -1,0 +1,768 @@
+I"hv<p>This section describes a number of extensions to the standard version of Q’Nial.
+The extensions consist of C-coded primitives to provide the basic capabilities
+together with Q’Nial libraries containing wrapper functions and transformers
+to provide patterns of usage of the primitives.</p>
+
+<p>These features can be switched on or off using the package manager if desired.</p>
+
+<p>The features consists of the following</p>
+
+<ol>
+  <li>Associative Arrays or Hash Tables</li>
+  <li>Child Process creation and management</li>
+  <li>Byte Streams for Inter-Process communication and data encoding/decoding</li>
+  <li>Support for Shared Memory</li>
+  <li>Dynamic loading of primitives</li>
+</ol>
+
+<p>Each of these is described in the following sections along with examples of their use.</p>
+
+<h1 id="associative-arrays">Associative Arrays</h1>
+
+<p>Associative arrays are an extension to Q’Nial implemented as hash tables. The keys
+can be either Q’Nial phrases, character arrays or integers. They are
+implemented as pure Q’Nial data structures but the primitives are
+coded primarily in C for efficiency.</p>
+
+<p>Because the tables are pure Q’Nial data structures they can be saved in
+a workspace or serialised and sent between processes. However, it is
+not advisable to write or display them on the console as they are
+not intended to be human readable. This will be changed in a later version of
+Q’Nial.</p>
+
+<p>For historical reasons there are two sets of functions, one that
+treats them as hash tables directly and one that views them as
+associative arrays with functions similar to the standard
+array manipulation functions of Q’Nial.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>As implemented, a hash table is an array of arrays. At the top level
+there are 5 entries</p>
+
+<ol>
+  <li>a standard phrase to identify a hash table</li>
+  <li>an array of keys</li>
+  <li>an array of values ( of the same size as keys)</li>
+  <li>some counters (number of entries, probe count, deleted count)</li>
+  <li>a metadata slot for programmer use</li>
+</ol>
+
+<p>The code uses linear hashing with rehashing to handle collisions.
+The size of a table is always a power of two. Rehashing uses a
+table of large primes to avoid collisions as much as possible.</p>
+
+<p>A table is automatically expanded if it becomes more than 70% full
+or the deleted count exceeds a nominated percentage.</p>
+
+<p>Two sets of routines are provided, a set of primitives and a set of
+Nial coded routines that mimic the routines of normal Q’Nial arrays.</p>
+
+<h2 id="low-level-operators">Low Level Operators</h2>
+
+<p>The primitives are for the most part implemented in C with some
+implemented in Q’Nial where performance is not an issue.</p>
+
+<p>Note that in all of these routines an invalid key (one that is not
+a phrase, character array or integer) will cause an invalid key
+fault to be returned.</p>
+
+<p>The following routines are coded in C and will validate the table and where
+necessary the type of the <em>key</em> supplied to the primitive. As stated
+above a key must be either a phrase, and integer or a character array.</p>
+
+<dl>
+  <dt><strong><em>_tcreate count</em></strong></dt>
+  <dd>
+    <p>Create a new table with initial size <em>count</em> and return it.
+If count is not a power of 2 the table size will be the smallest
+power of two greater than count (with a minimum size of 32).</p>
+  </dd>
+  <dt><strong><em>_tset table [key, value]</em></strong></dt>
+  <dd>
+    <p>Add a <em>key/value</em> pair to the table or update an existing <em>key</em>. If the
+resulting table would be more than 70% full the table will be
+rehashed. This routine also sets the number of probes (hashes and
+rehashes) used to find a suitable slot to add the entry. This is mainly
+used for peformance analysis.</p>
+  </dd>
+  <dt><strong><em>_tget table [key {, default}]</em></strong></dt>
+  <dd>
+    <p>Retrieve a value from the table using the supplied key. If no entry
+has this <em>key</em> and a <em>default-value</em> is supplied then it will be
+returned. Otherwise a Q’Nial fault will be thrown.</p>
+  </dd>
+  <dt><strong><em>istable table</em></strong></dt>
+  <dd>
+    <p>Test for a table, returning either <em>True</em> or <em>False</em>. This test
+uses the standard phrase as a way of identifying tables.</p>
+  </dd>
+  <dt><strong><em>_tsetm table meta-data</em></strong></dt>
+  <dd>
+    <p>Set the <em>meta-data</em> value for the table. This can be any Q’Nial value
+and the <em>meta-data</em> field can be used for any purpose. The idea is
+taken from <em>Lua</em> where it is used to implement prototype-instance
+inheritance.</p>
+  </dd>
+  <dt><strong><em>_tgetm table</em></strong></dt>
+  <dd>
+    <p>Get the metadata value of the table.</p>
+  </dd>
+  <dt><strong><em>_tdel table key</em></strong></dt>
+  <dd>
+    <p>Remove the key/value pair corresponding to <em>key</em> from table. The code
+remembers the deleted key to allow the empty slot to be re-used
+by the same key at a later stage. The function returns 1 if the key
+was found or a fault (<em>\?tdel_args</em>) if not found.</p>
+  </dd>
+  <dt><strong><em>_getkeys table</em></strong></dt>
+  <dd>
+    <p>Return the collection of keys as an array.</p>
+  </dd>
+</dl>
+
+<p>The following routines are coded in Nial and extend the functionality
+of the primitives.</p>
+
+<dl>
+  <dt><strong><em>tCount T</em></strong></dt>
+  <dd>
+    <p>Return the number of entries in the table</p>
+  </dd>
+  <dt><strong><em>tsize T</em></strong></dt>
+  <dd>
+    <p>Return the current capacity of the hash table. Note that tables will
+automatically resize so this does not indicate an upper limit.</p>
+  </dd>
+  <dt><strong><em>tnew KeyValuePairs</em></strong></dt>
+  <dd>
+    <p>Create a new hash table from a list of key/value pairs</p>
+  </dd>
+</dl>
+
+<h2 id="high-level-operations">High Level Operations</h2>
+
+<p>These routines are implemented on top of the basic primitives described above
+and are designed to mimic the standard Q’Nial array functions. They will not
+return a table to be printed.</p>
+
+<dl>
+  <dt><strong><em>aupdate AA [Key, Val]</em></strong></dt>
+  <dd>
+    <p>Add the key value pair to the associative array</p>
+  </dd>
+  <dt><strong><em>aupdateall AA KeyValPairs</em></strong></dt>
+  <dd>
+    <p>Add a list of key value pairs to the associative array</p>
+  </dd>
+  <dt><strong><em>apick Key AA</em></strong></dt>
+  <dd>
+    <p>Return the value asociated with the supplied key</p>
+  </dd>
+  <dt><strong><em>achoose Keys AA</em></strong></dt>
+  <dd>
+    <p>Return the array of values associated with the supplied array of keys</p>
+  </dd>
+  <dt><strong><em>atell AA</em></strong></dt>
+  <dd>
+    <p>Return the array of keys of the associative array</p>
+  </dd>
+  <dt><strong><em>apickall AA</em></strong></dt>
+  <dd>
+    <p>Return the array of all key/value pairs of the associative array</p>
+  </dd>
+  <dt><strong><em>aremove IS OP AA Key</em></strong></dt>
+  <dd>
+    <p>Remove an entry from the associative array, returning a
+boolean value to indicate whether or not the key was found
+in the array.</p>
+  </dd>
+  <dt><strong><em>atally AA</em></strong></dt>
+  <dd>
+    <p>Return the size of the array</p>
+  </dd>
+  <dt><strong><em>acapacity AA</em></strong></dt>
+  <dd>
+    <p>Return the current capacity of the associative array. This is not
+an upper limit as associative arrays will automatically resize to
+accomodate new entries.</p>
+  </dd>
+  <dt><strong><em>acreate Name KeyValpairs</em></strong></dt>
+  <dd>
+    <p>Create a new associative array from the list of key/value pairs
+and assign it to the named variable</p>
+  </dd>
+  <dt><strong><em>aequal AA BB</em></strong></dt>
+  <dd>
+    <p>Determine if two associative array have the same sets of key/value
+pairs</p>
+  </dd>
+</dl>
+
+<h1 id="process-creation-and-management">Process Creation and Management</h1>
+
+<p>These primitives provide the capability for a Nial process to create, manage and remove
+child processes.</p>
+
+<p><strong>NOTE:</strong> The file <em>sprocess.ndf</em> in <strong>niallib</strong> contains a number of
+supporting definitions and the <em>Examples</em> folder of the distribution
+contains some examples of usage.</p>
+
+<p>Termination of a child processes is handled by the SIGCHLD handler
+and a child can either be managed or unmanaged. By default a process
+is managed.</p>
+
+<p>A managed child is one where the parent process wishes to be
+notified upon termination so that the parent code can perform
+some post processing. A typical example would be a child spawned
+to perform a computation in parallel.</p>
+
+<p>An unmanaged child is one where the parent process has no interest
+in being notified of the termination of the child and the childs
+resources can be automatically reused. In this case the re-use happens
+when creating new processes or closing existing processes.</p>
+
+<p>A simple example of an unmanaged process would be to create a plot
+while the parent continues its processing.</p>
+
+<p>Child processes can also be clones of the parent inheriting its workspace
+with all data and functions, or run a completely separate program.</p>
+
+<p>When combined with <em>sockets</em> and <em>byte streams</em> it is possible to create a
+cluster of processes that spread
+a Q’Nial computation across either a single multi-core system, multiple machines or a
+combination of both using Nial arrays as messages.</p>
+
+<p>Two basic approaches are supported:</p>
+
+<ol>
+  <li>Loose coupling of processes with communication via pipes or sockets in which
+the processes can be on the same machine or spread across a cloud</li>
+  <li>Tight coupling of processes with communication via shared memory</li>
+</ol>
+
+<p>The approaches can also be mixed in a system implementation.</p>
+
+<p>Internally within the library a table of child processes is maintained. Each table
+entry maintains information about the child.</p>
+
+<h2 id="process-creation">Process creation</h2>
+
+<dl>
+  <dt><strong><em>spawn_child flags</em></strong></dt>
+  <dd>
+    <p>Fork a child process with communication over pipes as the standard input
+and output of the child process. The child is a <em>non-interactive</em> clone
+of the parent. The return value on success in an internal index of the
+child process, otherwise a fault is returned. The <em>flags</em> value is 1 for
+an unmanaged child and 0 otherwise.</p>
+  </dd>
+  <dt><strong><em>spawn_shell flags</em></strong></dt>
+  <dd>
+    <p>This primitive creates a child process running a bash shell and a
+pseudo-terminal as its input and output. Any external process can be run
+in this environment. The parent can initiate execution of a command
+by writing to the input stream associated with the process. Similarly it
+can directly read the output of the process. The returned value and flags
+are identical to <em>spawn_child</em>.</p>
+  </dd>
+  <dt><strong><em>spawn_cmd progname args flags</em></strong></dt>
+  <dd>
+    <p>This function creates a child process running the nominated command.
+The input and output streams of the child are pipes so some commands
+that need an interactive terminal will not run in this environment.
+On the other hand, pseudo terminals are a limited resource.</p>
+  </dd>
+</dl>
+
+<h2 id="io-with-children">I/O With Children</h2>
+
+<dl>
+  <dt><strong><em>child_writer child</em></strong></dt>
+  <dd>
+    <p>This returns a stream for writing to the standard input of the child</p>
+  </dd>
+  <dt><strong><em>child_reader child</em></strong></dt>
+  <dd>
+    <p>This returns a stream for reading form the standard output of the child</p>
+  </dd>
+</dl>
+
+<h2 id="interrupts-and-status">Interrupts and Status</h2>
+
+<dl>
+  <dt><strong><em>interrupt_child child signal</em></strong></dt>
+  <dd>
+    <p>Send a signal to the child process. The signal value can either be 0
+for a kill signal or non-zero for an interrupt.</p>
+  </dd>
+  <dt><strong><em>child_status child</em></strong></dt>
+  <dd>
+    <p>The <em>child</em> index here can either be -1, to match any managed terminated
+child or the index of an existing child. The function returns a triple of the
+child id, its current status and its termination code.
+The current status of the child is 1 for an active child and 2 for a terminated
+child.</p>
+  </dd>
+  <dt><strong><em>sys_exit code</em></strong></dt>
+  <dd>
+    <p>Terminate this process and return the <em>code</em> value as the exit code.</p>
+  </dd>
+</dl>
+
+<h2 id="time-functions">Time Functions</h2>
+
+<dl>
+  <dt><strong><em>nano_time</em></strong></dt>
+  <dd>
+    <p>This function provides a high precision timer for determining the performance
+of code. It returns a real value with nanosecond precision. It cannot be used
+as a wall clock.</p>
+  </dd>
+  <dt><strong><em>nano_sleep seconds nano-seconds</em></strong></dt>
+  <dd>
+    <p>High precision sleep function for the process.</p>
+  </dd>
+</dl>
+
+<h1 id="byte-streams">Byte Streams</h1>
+
+<p>Nial streams are an extensible byte buffering mechanism that can
+be used for reading and writing of data to files, sockets, pipes
+etc as well as internal encoding and decoding of Q’Nial data structures.</p>
+
+<p><strong>NOTE:</strong> The file <em>nstreams.ndf</em> in <strong>niallib</strong> contains supporting
+definitions and the <em>Examples</em> directory of the distribution
+has some example code.</p>
+
+<p>A stream is referenced in the application by a integer index into a
+table of stream data structures. This index is supplied when opening a
+stream.</p>
+
+<p>The module provides a number of primitives for opening and closing
+streams, connecting them to file descriptors, writing and reading
+and for encoding and decoding Q’Nial arrays.</p>
+
+<p>Streams provide a boundary between application logic and the needs of
+networking and file systems. On input the data from a file or network
+connection is transferred to the streams buffers and then read by the
+application into Nial arrays. On output data is transferred from Nial
+data structures into the buffers and then subsequently written.</p>
+
+<p>This approach allows streams to be used in either a blocking or non-blocking
+style depending on the applications requirements. This is accomplished by
+using a polling approach in a number of routines with a supplied timeout. This
+timeout value can either be a positive integer (&gt;= 0) indicating microseconds or a
+value of -1 indicating an indefinite timeout.</p>
+
+<p>Streams can also be used as a purely internal, byte based, data structure
+disconected from file descriptors.</p>
+
+<p>The primitives can be divided into 5 categories</p>
+
+<ol>
+  <li>Creating/Deleting Streams</li>
+  <li>Basic I/O</li>
+  <li>Serialising/Deserialising Arrays</li>
+  <li>Polling I/O</li>
+  <li>Opening and closing, pipes, socket pairs etc.</li>
+</ol>
+
+<h2 id="creating-streams">Creating Streams</h2>
+
+<p>The following routines are used to allocate and free internal data structures and
+buffers. They do not involve any data transfer.</p>
+
+<dl>
+  <dt><strong><em>nio_open fd mode</em></strong></dt>
+  <dd>
+    <p>Create a stream and assign it to a file descriptor fd ( -1 if no
+descriptor) with the nominated mode. At the moment the mode value
+is unused in the runtime</p>
+  </dd>
+  <dt><strong><em>nio_close stream</em></strong></dt>
+  <dd>
+    <p>Close any associated file descriptor and release all memory buffers
+associated with the stream</p>
+  </dd>
+</dl>
+
+<h2 id="basic-operations">Basic Operations</h2>
+
+<p>The basic operations are concerned with moving data backwards and
+forwards under programmer control or controlling the relationship
+between streams and file descriptors.</p>
+
+<p>They are as follows:</p>
+
+<dl>
+  <dt><strong><em>nio_count stream</em></strong></dt>
+  <dd>
+    <p>Returns the number of characters buffered on the stream at this moment.
+On an input stream this will not attempt to transfer any data
+from the network or file system.</p>
+  </dd>
+  <dt><strong><em>nio_read_stream stream climit timeout</em></strong></dt>
+  <dd>
+    <p>This routine will attempt to ensure that the internal buffers contain at least
+<em>climit</em> bytes. The call will repeatedly poll for input from the associated descriptor
+if needed with a timeout value of <em>timeout</em> until either there are <em>climit</em>
+bytes buffered or an end of file condition is reached. The function returns the
+number of bytes buffered.</p>
+  </dd>
+  <dt><strong><em>nio_read stream num-bytes</em></strong></dt>
+  <dd>
+    <p>This function will attempt to read <em>num-bytes</em> from the stream. If the stream
+already has <em>num-bytes</em> buffered it will return those without reference to any
+associated file descriptor. If there are less than <em>num-bytes</em> buffered and the
+stream has an open file descriptor it will attempt a single read from the
+descriptor without waiting for the descriptor to become ready. It will then
+return up to <em>num-bytes</em> or <em>Null</em> if the stream is empty.</p>
+  </dd>
+  <dt><strong><em>nio_readln stream</em></strong></dt>
+  <dd>
+    <p>Read a properly terminated line of characters from the stream.
+including the line terminators. If no line can be found then it
+returns null. The call polls for additional input before searching
+for a line.</p>
+  </dd>
+  <dt><strong><em>nio_write_stream stream timeout</em></strong></dt>
+  <dd>
+    <p>While the associated file descriptor is writeable, write as many bytes
+as possible. This will return the count written or a fault if an error
+occured (e.g closed descriptor).</p>
+  </dd>
+  <dt><strong><em>nio_write stream char-array</em></strong></dt>
+  <dd>
+    <p>Add the bytes in the supplied character array to the stream and return the count
+written. This involves no transfer to an external file descriptor.</p>
+  </dd>
+  <dt><strong><em>nio_writeln stream char-array</em></strong></dt>
+  <dd>
+    <p>Add the character array to the stream and then add a line terminator
+sequence. Returns the number of characters written.</p>
+  </dd>
+  <dt><strong><em>nio_flush stream</em></strong></dt>
+  <dd>
+    <p>Using a blocking model, write the contents of the stream’s buffers to
+the associated file descriptor and return the number written. This will
+only fail to write all bytes if the descriptor is closed or the process
+is interrupted.</p>
+  </dd>
+</dl>
+
+<h2 id="serialising-arrays">Serialising Arrays</h2>
+
+<p>A Q’Nial array that is not self-referential can be serialised to a stream</p>
+
+<dl>
+  <dt><strong><em>nio_block_array stream array</em></strong></dt>
+  <dd>
+    <p>Encode an array on the nominated stream and return the number of
+characters used in the encoding. No transfer of data to an associated
+file descriptor is performed.</p>
+  </dd>
+  <dt><strong><em>nio_unblock_array stream</em></strong></dt>
+  <dd>
+    <p>Decode and return an array from the nominated stream. At the moment
+this is a blocking operation. If an error occurs, <em>Null</em> is returned.</p>
+  </dd>
+</dl>
+
+<h2 id="polling-streams">Polling Streams</h2>
+
+<p>These primitives provide a link to the underlying OS polling mechanisms
+using the <em>select</em> system call (the lowest common denominator on Linux
+and OSX). This approach has a couple of disadvantages based on limitations of
+the <em>select</em> system call.</p>
+
+<p>Firstly the call is limited to around 1024 file descriptors although for most
+Nial programs this would not be a problem. Secondly if any descriptor in a
+call has a problem the entire call fails without identifying the source of the
+problem.</p>
+
+<p>Two approaches are provided, check if a  single stream is readable/writeable or
+check for I/O on an array of streams. The single stream approach can emulate the
+multiple stream approach using a Nial transformer (<em>EACH</em> etc) although the
+approach will be slower as the timeout becomes cumulative.</p>
+
+<p>The calls use a <em>timeout</em> value to determine how long the call should wait for
+availability of the descriptor. This can be zero for no wait, a positive integer
+value in microseconds or -1 for an indefinite blocking wait.</p>
+
+<p>The single stream primitives are:</p>
+
+<dl>
+  <dt><strong><em>nio_is_readable stream timeout</em></strong></dt>
+  <dd>
+    <p>Check to see if the <em>stream</em> is readable waiting for the timeout value.
+If an invalid stream is supplied the call will return a
+fault (<em>\?invalid_stream</em>) otherwise it will return 1 if the stream
+has data, 0 if the stream has no data or -1 if the stream is at end
+of file or closed or has an error.</p>
+  </dd>
+  <dt><strong><em>nio_is_writeable stream timeout</em></strong></dt>
+  <dd>
+    <p>Check to see if the <em>stream</em> is writeable, waiting for the timeout value.
+If an invalid stream is supplied the call will return a
+fault (<em>\?invalid_stream</em>) otherwise it will return 1 if the stream
+can accept data, 0 if the stream will not accept data
+or -1 if the stream is at end of file, or closed or has an error.</p>
+  </dd>
+</dl>
+
+<p>And the multiple stream primitive is :</p>
+
+<dl>
+  <dt><strong><em>nio_poll timeout read-list write-list exception-list</em></strong></dt>
+  <dd>
+    <p>This directly maps to the <em>select</em> system call. Each of the lists
+is a list of streams and the function checks to see if any of their
+descriptors are readable, writeable or has an exception.This returns
+three boolean arrays corresponding to the streams which indicates if
+the associated stream is readable, writable or has an exception.
+The timeout is -1 for indefinite blocking or a number of microseconds.
+If an error occurs the call returns <em>Null</em>.</p>
+  </dd>
+</dl>
+
+<h2 id="socket-pairs-and-pipes">Socket Pairs and Pipes</h2>
+
+<dl>
+  <dt><strong><em>nio_socketpair flags</em></strong></dt>
+  <dd>
+    <p>Create a pair of UNIX Stream sockets sockets that are endpoints of a
+single internal connection. The flag is an integer value that controls
+whether or not the sockets will be blocking (non-zero) or
+non-blocking (zero). The call returns a pair
+of file descriptors or the fault <em>\?syserr</em>. The file descriptors
+can then be associated with a stream.</p>
+  </dd>
+  <dt><strong><em>nio_newpipe flags</em></strong></dt>
+  <dd>
+    <p>Create a pipe and return a pair of the file descriptors. The flag
+controls blocking or non-blocking behaviour.</p>
+  </dd>
+</dl>
+
+<h1 id="shared-memory">Shared Memory</h1>
+
+<p>In its current form Q’Nial is not multi-threaded and the shared memory
+primitives are an addition to provide similar capabilities along with the
+child process approach described earlier.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>NOTE</strong> The file <em>memspaces.ndf</em> in <strong>niallib</strong> contains supporting</td>
+    </tr>
+    <tr>
+      <td>definitions and the <em>Examples</em> directory of the distribution</td>
+    </tr>
+    <tr>
+      <td>has some example code.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The primitives are divided into</p>
+
+<ol>
+  <li>Creating and mapping shared memory and files</li>
+  <li>Coordinating processes interacting through shared memory</li>
+  <li>Copying data in/out of shared memory</li>
+  <li>Support routines</li>
+</ol>
+
+<p>The primitives are intended to provide the base layer for higher layer
+experimentation (e.g. Software Transactional Memory).</p>
+
+<p>A Nial process can access multiple shared memory segments with each segment
+identified by an integer index into an internal table. The segments can
+correspond to named shared memory, locally allocated shared memory or to
+memory mapped files.</p>
+
+<p>Data is copied to/from shared memory into Nial data types and only a
+limited number of types are supported, boolean, integer, character and real
+lists. Each type is identified by an integer code. More complex types can
+be shared by first serialising them and then sharing the serialised form.</p>
+
+<p>When copying in from shared memory the primitive generates the Nial array to
+avoid memory corruption.</p>
+
+<p>The supported types are identified by an integer code as show in the following
+table and also defined in the <strong>niallib</strong> file <strong>memspaces.ndf</strong>.</p>
+
+<hr />
+<p>Type          Code   Name
+————  —— ——————–
+Integers       1     MSP_INTTYPE</p>
+
+<p>Booleans       2     MSP_BOOLTYPE</p>
+
+<p>Characters     3     MSP_CHARTYPE</p>
+
+<p>Reals          4     MSP_REALTYPE</p>
+
+<hr />
+
+<h2 id="creating-and-mapping-shared-memory">Creating and Mapping Shared Memory</h2>
+
+<p>These primitives provide for creatng and mapping shared memory segments
+as well as memory mapping files.</p>
+
+<dl>
+  <dt><strong><em>msp_shm_open name open-code permissions</em></strong></dt>
+  <dd>
+    <p>Create a POSIX named shared memory space and return a file descriptor
+which can then be used to memory map the space. The <em>open-code</em> is a
+bit mask value which
+maps to the <em>shm_open</em> values <em>O_RDONLY</em> (1), <em>O_CREAT</em> (2) and
+<em>O_EXCL</em> (4). If <em>O_RDONLY</em> is not specified then the default
+<em>O_RDWR</em> will be used. The <em>permissions</em> value is the standard open
+mode.</p>
+  </dd>
+  <dt><strong><em>msp_shm_unlink name</em></strong></dt>
+  <dd>
+    <p>Unlink a shared memory space.</p>
+  </dd>
+  <dt><strong><em>msp_map_local size flags</em></strong></dt>
+  <dd>
+    <p>Create a local memory space. If the <em>flags</em> value is non zero the created
+space is private, otherwise shared amongst the children
+of this process. Returns the index of the space.</p>
+  </dd>
+  <dt><strong><em>msp_map_fd size flags fd</em></strong></dt>
+  <dd>
+    <p>Memory map a file based on the descriptor. The map can be a part of the
+file (<em>size</em> &gt; 0) or the whole file (<em>size</em> = 0). The flags are a
+bit mask defining the access mode, private (1), read only (2). The
+default is shared with read/write.</p>
+  </dd>
+</dl>
+
+<h2 id="process-coordination">Process Coordination</h2>
+
+<p>These primitives provide low level synchronisation  using atomic operations.</p>
+
+<dl>
+  <dt><strong><em>msp_cas mem-space offset compare-value replacement-value</em></strong></dt>
+  <dd>
+    <p>This provides an atomic compare and swap of integer values. The offset
+must be aligned on a word boundary (32 bit or 64 bit depending on the
+configured version). The primitive returns true if the operation
+succeeded, otherwise false.</p>
+  </dd>
+</dl>
+
+<h2 id="copy-incopy-out">Copy In/Copy Out</h2>
+
+<p>A small number of routines are provided to move data between shared memory and
+the Nial process.</p>
+
+<p><strong>Note</strong> these are not atomic operations.</p>
+
+<dl>
+  <dt><strong><em>msg_get_raw mem-space nial-type memory-offset count</em></strong></dt>
+  <dd>
+    <p>Copy data from a shared memory segment (<em>mem-space</em>) into a newly created
+Nial array of dimension 1 (this can be reshaped within Nial). The memory
+offset is from the start of the memory segment and
+the <em>count</em> is the number of entries of the nominated type to copy.</p>
+  </dd>
+  <dt><strong><em>msp_put_raw mem-space nial-data memory-offset count</em></strong></dt>
+  <dd>
+    <p>Copy data from a Nial array into a shared memory segment. The <em>count</em> is
+the number of entries from the Nial array.</p>
+  </dd>
+</dl>
+
+<h2 id="support-routines">Support Routines</h2>
+
+<p>These are simple utility routines.</p>
+
+<p>Q’Nial organises memory on word boundaries (32 bits or 64 bits depending on the
+configured choice) and provides alignment. The support routines provide a way
+to determine the amount of shared memory needed to support one of the
+supported Nial types.</p>
+
+<dl>
+  <dt><strong><em>msp_msize nial-type count</em></strong></dt>
+  <dd>
+    <p>Returns the number of bytes associated with a given type and count.
+Both arguments are integers with the type being one of <em>MSP_BOOLTYPE</em>,
+<em>MSP_INTTYPE</em>, <em>MSP_REALTYPE</em> or <em>MSP_CHARTYPE</em>.</p>
+  </dd>
+  <dt><strong><em>msp_sysconf code</em></strong></dt>
+  <dd>
+    <p>Return some information about the processor on which Nial is running.
+If <em>code</em> is 0 then return the number of configured cores, if <em>code</em>
+if 1 then return the number of available cores.</p>
+  </dd>
+</dl>
+
+<h1 id="dynamic-loading">Dynamic Loading</h1>
+
+<p>Dynamic loading provides an alternative to reconfiguring Q’Nial when one wishes
+to add additional primitives.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>NOTE</strong> A number of examples are provided in the <em>Modules</em></td>
+    </tr>
+    <tr>
+      <td>directory of the distribution which demonstrate how to code the primitives</td>
+    </tr>
+    <tr>
+      <td>as well as how to build the shared object. A CMake example configuration is</td>
+    </tr>
+    <tr>
+      <td>provided as well as example <em>NDF</em> files to load the primitives and simplify the</td>
+    </tr>
+    <tr>
+      <td>calls using currying.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Dynamically loaded routines can not be saved in a workspace and
+loaded at a later time. The shared libraries will not be restored as part of a
+workspace load.</p>
+
+<p>The routines described here are intended to form the base layer. As such they
+are direct wrappers of system library functions.</p>
+
+<p>The dynamically loaded functions are standard Nial coded functions conforming to
+Nial coding conventions.</p>
+
+<p>The external routines in each dynamic library are not merged when the library
+is loaded. It is possible for two different libraries to have primitives
+with the same name.</p>
+
+<dl>
+  <dt><strong><em>ndl_load file-name</em></strong></dt>
+  <dd>
+    <p>Load the shared object library contained in the nominated file. The
+externals of the library are not added to the set of Nial globals. At
+the moment the <em>file-name</em> parameter must be either an absolute file
+name of a relative path to the library.
+This returns an internal data structure which should not be changed.</p>
+  </dd>
+  <dt><strong><em>ndl_close lib</em></strong></dt>
+  <dd>
+    <p>Close a shared library. After this call no function from the library
+ will be usable.</p>
+  </dd>
+  <dt><strong><em>ndl_getsym lib fun-name</em></strong></dt>
+  <dd>
+    <p>Return a function pointer data structure that can be used to call the
+function identified by <em>fun-name</em> from the shared object <em>lib</em>.</p>
+  </dd>
+  <dt><strong><em>ndl_call fun-ptr args</em></strong></dt>
+  <dd>
+    <p>Call the function identified by <em>fun-ptr</em> with the arguments <em>args</em>.
+This returns the results of the function call.</p>
+  </dd>
+</dl>
+:ET

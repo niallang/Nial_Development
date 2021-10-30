@@ -1,10 +1,9 @@
 ---
 title: An Introduction to Nial
 layout: single
+class: wide
 ---
 
-
-# Preface
 
 This Introduction to Q'Nial is a quick guide on how to use Nial. It is
 intended for people with some experience in programming languages such

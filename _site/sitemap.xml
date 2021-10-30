@@ -11,6 +11,12 @@
 <loc>http://localhost:4000/ndocs/LanguageDefinition.html</loc>
 </url>
 <url>
+<loc>http://localhost:4000/ndocs/NialDict.html</loc>
+</url>
+<url>
+<loc>http://localhost:4000/ndocs/NialExtensions.html</loc>
+</url>
+<url>
 <loc>http://localhost:4000/ndocs/intro/chapter1.html</loc>
 </url>
 <url>
@@ -45,10 +51,10 @@
 </url>
 <url>
 <loc>http://localhost:4000/ndocs/NialDictionary.html</loc>
-<lastmod>2021-10-27T14:00:04+11:00</lastmod>
+<lastmod>2021-10-28T07:10:28+11:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/ndocs/V7%20QNial%20Dictionary.html</loc>
-<lastmod>2021-10-27T14:00:04+11:00</lastmod>
+<lastmod>2021-10-28T07:10:28+11:00</lastmod>
 </url>
 </urlset>

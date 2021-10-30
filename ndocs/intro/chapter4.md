@@ -1,6 +1,7 @@
 ---
 title: Language Mechanisms - Nial Introduction, Chapter 4
 layout: single
+classes: wide
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 title: Host System Interface - Nial Introduction, Chapter 6
 layout: single
+classes: wide
 ---
 
 
