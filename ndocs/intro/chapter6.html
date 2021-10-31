@@ -1,0 +1,457 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Host System Interface - Nial Introduction, Chapter 6 - Nial Array Language Website</title>
+<meta name="description" content="Nial Community Site">
+
+
+  <meta name="author" content="John Gibbons">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Nial Array Language Website">
+<meta property="og:title" content="Host System Interface - Nial Introduction, Chapter 6">
+<meta property="og:url" content="https://gibbonsja.github.io//Nial_Development/ndocs/intro/chapter6.html">
+
+
+  <meta property="og:description" content="Nial Community Site">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://gibbonsja.github.io//Nial_Development/ndocs/intro/chapter6.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "John Gibbons",
+      "url": "https://gibbonsja.github.io//Nial_Development/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/Nial_Development/feed.xml" type="application/atom+xml" rel="alternate" title="Nial Array Language Website Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/Nial_Development/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/Nial_Development/"><img src="/Nial_Development/assets/images/NialLogo.jpg" alt="Nial Array Language Website"></a>
+        
+        <a class="site-title" href="/Nial_Development/">
+          Nial Array Language Website
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/Nial_Development/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Nial_Development/ndocs/">Documentation</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/Nial_Development/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/Nial_Development/ndocs" itemprop="item"><span itemprop="name">Ndocs</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/Nial_Development/intro" itemprop="item"><span itemprop="name">Intro</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">Host System Interface - Nial Introduction, Chapter 6</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Host System Interface - Nial Introduction, Chapter 6">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://gibbonsja.github.io//Nial_Development/ndocs/intro/chapter6.html" class="u-url" itemprop="url">Host System Interface - Nial Introduction, Chapter 6
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h1 id="host-system-interface">Host System Interface</h1>
+
+<ul>
+  <li><a href="#use-of-files">Use of Files</a></li>
+  <li><a href="#interpreter-mechanisms">Interpreter Mechanisms</a></li>
+</ul>
+
+<p>Q’Nial is designed as a portable language processor that runs in a very
+similar way on different operating systems. This design goal leads to an
+abstract ap proach to accessing system functions. A second design goal
+is to make many of the internal capabilities of the interpreter
+accessible through operations which permit the user to exploit the
+underlying mechanisms. Some of the latter operations are dependent on
+the specific implementation details.</p>
+
+<h2 id="use-of-files">Use of Files</h2>
+
+<p>In Q’Nial there are four ways that files can be used:</p>
+
+<ol>
+  <li>conventional sequential files accessed by line</li>
+  <li>direct access files accessed by byte position,</li>
+  <li>Nial direct access files where components are Nial strings,</li>
+  <li>Nial direct access files where components are arbitrary arrays.</li>
+</ol>
+
+<p>The first method can be used to access and create text files that are
+used by other applications. The actions on the file equate a Nial string
+with a record of text in the file. The end-of-line indication is
+stripped off on input and restored on output, allowing Nial programs to
+work compatibly across different host systems. Q’Nial supports
+input/output operations to a console or terminal as accessing the
+sequential system files <em>stdin</em> and <em>stdout</em>. This means that <em>readscreen</em> is
+implemented by writing the argument to <em>stdout</em> and then doing a read of
+a record of data from <em>stdin</em>.</p>
+
+<p>The second method is used for direct manipulation of a file using the
+standard Posix systems functions. A file is viewed as a sequence of
+bytes and two operations <em>readfield</em> and <em>writefield</em> are provided to read
+bytes from a file or write bytes to one.</p>
+
+<p>The Nial direct access methods use two host system binary files to
+represent a conceptual file, one to hold the index and the other to hold
+the data records. An example of the use of direct files can be seen in
+the library file <em>simpledb.ndf</em>.</p>
+
+<p>The console versions of Q’Nial also supports a window capability for
+character-based windows. This is integrated with the normal sequential
+keyboard input, screen output so that programs that use simple input and
+output can work with or without windows. An extensive editor capability
+is provided with the windowing capability.</p>
+
+<h2 id="interpreter-mechanisms">Interpreter Mechanisms</h2>
+
+<p>The internal features of the Q’Nial interpreter made available to the
+user include:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>scan</td>
+      <td>scan a string of program text into a token stream</td>
+    </tr>
+    <tr>
+      <td>parse</td>
+      <td>parse a token stream into a parse tree.</td>
+    </tr>
+    <tr>
+      <td>eval</td>
+      <td>evaluate a parse tree</td>
+    </tr>
+    <tr>
+      <td>execute</td>
+      <td>evaluate a string of program text</td>
+    </tr>
+    <tr>
+      <td>descan</td>
+      <td>convert a token stream to a list of strings</td>
+    </tr>
+    <tr>
+      <td>deparse</td>
+      <td>convert a parse tree to an annotated token stream</td>
+    </tr>
+    <tr>
+      <td>picture</td>
+      <td>create data pictures as character tables</td>
+    </tr>
+    <tr>
+      <td>paste.</td>
+      <td>paste a collection of character tables together</td>
+    </tr>
+    <tr>
+      <td>positions</td>
+      <td>give coordinates of the position of items in a picture</td>
+    </tr>
+    <tr>
+      <td>assign</td>
+      <td>assign a value to a variable name or cast</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>look up the data value associated with a variable</td>
+    </tr>
+    <tr>
+      <td>apply</td>
+      <td>apply an operation to a value the operation being given by its name or as a parse tree</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td>do an indexed assignment</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These capabilities permit an application to manipulate a program as
+data and to control its execution. For example, in a rule-based
+artificial intelligence system, the rules can be stored as text while
+the system is being designed. The operation <em>execute</em> can be used to
+evaluate the rules during this stage. Later, when the application has
+stabilized, a more efficient version can be built using <em>parse scan</em> to
+process the rules into parse trees and using <em>eval</em> to evaluate them. The
+equation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>execute Str = eval parse scan Str
+</code></pre></div></div>
+
+<p>which holds for every string that denotes a Nial array expression,
+drives this approach.</p>
+
+<p>The operation <em>apply</em> can be used in combination with a selection process
+to permit dynamic application of one operation from a set of operations.
+This can be used to simulate method application in a object-oriented
+system.</p>
+
+<p>The operations associated with the <em>picture</em> operation allow the user to
+build output screens and reports by pasting together component parts
+using the operation <em>paste</em>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/Nial_Development/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 John Gibbons. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/Nial_Development/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/Nial_Development/assets/js/lunr/lunr.min.js"></script>
+<script src="/Nial_Development/assets/js/lunr/lunr-store.js"></script>
+<script src="/Nial_Development/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

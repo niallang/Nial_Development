@@ -1,0 +1,705 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>A Data Manipulation Language - Nial Introduction, Chapter 3 - Nial Array Language Website</title>
+<meta name="description" content="Nial Community Site">
+
+
+  <meta name="author" content="John Gibbons">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Nial Array Language Website">
+<meta property="og:title" content="A Data Manipulation Language - Nial Introduction, Chapter 3">
+<meta property="og:url" content="https://gibbonsja.github.io//Nial_Development/ndocs/intro/chapter3.html">
+
+
+  <meta property="og:description" content="Nial Community Site">
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://gibbonsja.github.io//Nial_Development/ndocs/intro/chapter3.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "John Gibbons",
+      "url": "https://gibbonsja.github.io//Nial_Development/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/Nial_Development/feed.xml" type="application/atom+xml" rel="alternate" title="Nial Array Language Website Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/Nial_Development/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/Nial_Development/"><img src="/Nial_Development/assets/images/NialLogo.jpg" alt="Nial Array Language Website"></a>
+        
+        <a class="site-title" href="/Nial_Development/">
+          Nial Array Language Website
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/Nial_Development/">Home</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Nial_Development/ndocs/">Documentation</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+  
+    
+
+
+
+<nav class="breadcrumbs">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    
+    
+      
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/Nial_Development/" itemprop="item"><span itemprop="name">Home</span></a>
+
+          <meta itemprop="position" content="1" />
+        </li>
+        <span class="sep">/</span>
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/Nial_Development/ndocs" itemprop="item"><span itemprop="name">Ndocs</span></a>
+          <meta itemprop="position" content="2" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="/Nial_Development/intro" itemprop="item"><span itemprop="name">Intro</span></a>
+          <meta itemprop="position" content="3" />
+        </li>
+        <span class="sep">/</span>
+      
+    
+      
+      
+        <li class="current">A Data Manipulation Language - Nial Introduction, Chapter 3</li>
+      
+    
+  </ol>
+</nav>
+
+  
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="A Data Manipulation Language - Nial Introduction, Chapter 3">
+    
+    
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="https://gibbonsja.github.io//Nial_Development/ndocs/intro/chapter3.html" class="u-url" itemprop="url">A Data Manipulation Language - Nial Introduction, Chapter 3
+</a>
+          </h1>
+          
+
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <h1 id="a-data-manipulation-language">A Data Manipulation Language</h1>
+
+<ul>
+  <li><a href="#functional-objects">Functional Objects</a></li>
+  <li><a href="#bracket-notation">Bracket Notation</a></li>
+  <li><a href="#addresses-and-indexing">Addresses and Indexing</a></li>
+</ul>
+
+<p>All data objects in Nial are treated as rectangular nested arrays with
+dimen sionality, extent and depth. The array</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X := 2 3 reshape (8 9) 23 'hello world' "goodbye (tell 3 2)([sin,cos]0.5)
+
++-----------------------------------+
+|8 9    |       23|hello world      |
++-------+---------+-----------------|
+|goodbye|+-------+|0.479426 0.877583|
+|       ||0 0|0 1||                 |
+|       |+---+---||                 |
+|       ||1 0|1 1||                 |
+|       |+---+---||                 |
+|       ||2 0|2 1||                 |
+|       |+-------+|                 |
++-----------------------------------+
+</code></pre></div></div>
+
+<p>is a 2 by 3 array of other arrays. The upper left entry (at address 0 0)
+is the pair 8 9 and the item at address 1 1 is the table of addresses
+for a 3 by 2 array. X holds a character string at address 0 2 and a
+phrase at address 1 0.</p>
+
+<p>There are three measurements of the structure of an array:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>valence</td>
+      <td>the number of dimensions (or axes)</td>
+    </tr>
+    <tr>
+      <td>shape</td>
+      <td>the list of lengths of the array along each dimension</td>
+    </tr>
+    <tr>
+      <td>tally</td>
+      <td>the number of items in the array.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The measurements are related. For every array A, the following equations
+hold:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>valence A = tally shape A
+tally A = product shape A
+</code></pre></div></div>
+
+<p>The definitions along with the second equation indicate that the term
+item refers to top level objects in an array and not the most deeply
+nested ones. The meaning of these measure ments for the array X is as
+follows:</p>
+
+<ul>
+  <li>the valence is 2 (X has two dimen sions),</li>
+  <li>the shape is the list 2 3 (X has two rows and three columns), and</li>
+  <li>the tally is 6 (X has six items).</li>
+</ul>
+
+<p>The expression for the table assigned to X involves the infix use of
+operation <em>reshape</em> between two lists, the first giving the shape of the
+table and the second being a list of the arrays to be used as the items
+of the table.</p>
+
+<p>The syntax for a list is a sequence of two or more array expressions
+placed side-by-side. This construct is called a strand. A strand
+evaluates to the list that has as its items the values of the
+expressions in the strand. An item of a strand can be an atomic array,
+string or an expression in parentheses.</p>
+
+<h2 id="functional-objects">Functional Objects</h2>
+
+<p>Nial has two classes of functional objects: operations and transformers.
+Operations are the functional objects that map arrays to arrays, such as
+<em>rows</em>, <em>reshape</em> and <em>link</em>. Operations are either predefined (implemented by
+the Q’Nial interpreter) or defined by the user during a session.</p>
+
+<p>Operations in Nial are said to be first order functions because they
+act directly on an argument array to produce a result array. Since a
+list of arrays is itself an array, some operations require that the
+argument array have a specific number of items. As well, many operations
+return a result that is a list of arrays computed by the operation.</p>
+
+<p>The syntax for the use of an operation allows it to be used in both a
+prefix and an infix manner. For example, operation <em>link</em> can be used
+between two arguments that are lists in order to join the two lists
+together, or it can be used in front of an argument that is a list of an
+arbitrary number of lists in order to join all the lists together.</p>
+
+<p>An operation is applied to an array and results in an array value. For
+example, applying the operation <em>sum</em> to the list 3 4 5 results in the
+value 12.</p>
+
+<p>The notation for applying an operation in Nial is based on juxtaposition
+(side-by-side placement of objects). The operation is placed before the
+argument. The following example shows the juxtaposition syntax for
+applying an operation.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     sum (3 4 5)
+12
+</code></pre></div></div>
+
+<p>The parentheses used in the above example are not necessary. Nial would
+give the same result if they were omitted.</p>
+
+<p>The notation for infix use of an operation like <em>reshape</em> places the
+operation between two arguments. It is interpreted as the operation
+applied to the pair formed by the two arguments.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     2 3 reshape 4 5 6 7 8 9
+4 5 6
+7 8 9
+
+
+     reshape ((2 3) (4 5 6 7 8 9))
+4 5 6
+7 8 9
+</code></pre></div></div>
+
+<p>A transformer is a functional object that maps an operation to a
+modified operation. It is said to be second order function, because it
+is a functional object that operates on one or more first order
+functions and produces a function. The effect of applying the
+transformer <em>EACH</em> to the operation <em>first</em>, for example, results in an
+modified operation (called the EACH transform of first) that applies
+<em>first</em> to each item of its argument. Juxtaposition is used to denote the
+application of a transformer to an operation. The application of the
+modified operation in</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     (EACH first) ((2 3) (4 5 6 7 8 9))
+2 4
+</code></pre></div></div>
+
+<p>is equivalent to applying first to the lists in the pair</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    (first (2 3)) (first (4 5 6 7 8 9))
+2 4
+</code></pre></div></div>
+
+<p>Juxtaposition of objects can be used in three additional ways besides
+its use in forming strands. Juxtaposition can occur in prefix use of an
+operation, infix use of an operation and in application of a
+transformer. To avoid ambiguity, specific rules have been adopted:</p>
+
+<ol>
+  <li>Strand formation takes precedence over either infix or prefix operation application.</li>
+  <li>Transformer application takes precedence over operation application.</li>
+  <li>If two or more prefix uses of operations occur in a row, as in
+<em>sum link A</em>, the rightmost operation is done first and its result is used
+as the argument of the operation to the left.</li>
+  <li>If an infix use precedes a prefix use, as in <em>A reshape link B</em>, 
+the prefix application is done first.</li>
+</ol>
+
+<p>The first rule means that <em>sum 3 4 5</em> is the same as <em>sum (3 4 5)</em> and that
+<em>2 3 link 4 5</em> is the same as <em>(2 3) link (4 5)</em>.</p>
+
+<p>The second rule means that the expression <em>EACH first (2 3 4) (5 6 7 8 9)</em>
+applies the modified operation <em>EACH first</em> to the pair formed by the
+strand.</p>
+
+<p>The third and fourth rules exist because there is no other sensible
+interpretation of these juxtapositions.</p>
+
+<p>A modified operation can also be used in an infix manner. For example,
+in the operation labeltable described in the previous chapter, the
+expression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rowlabels EACHBOTH hitch rows Table
+</code></pre></div></div>
+
+<p>uses <em>EACHBOTH hitch</em> in an infix manner between Rowlabels and the prefix
+expression rows Tables.</p>
+
+<p>The reading of the above expression is helped by the spelling convention
+in Nial for names associated with the different classes of objects. An
+operation is spelled in lower case, a transformer in upper case and an
+array variable or named expression begins with a capital with the rest
+in lower case. These rules make it possible to recognize the kind of
+object associated with the name. The user of Q’Nial is not required to
+spell names according to these rules. When definitions are displayed by
+<em>see</em> or <em>defedit</em> they appear in canonical form with this prescribed
+spelling format. Nial is case insensitive; <em>first</em> and <em>First</em> are both
+legal spellings, but the former is the canonical one.</p>
+
+<p>The interpretation of <em>sum link A</em> to mean <em>sum (link A)</em> given above
+suggests that the juxtaposition sum link could be used to denote the
+composition of operations <em>sum</em> and <em>link</em>, resulting in the following
+equation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(sum link) A = sum (link A)
+</code></pre></div></div>
+
+<p>As well, it is useful to have this notation for composition in order to
+specify the composition of two operations as the argument of a
+transformer. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EACH (link second) A
+</code></pre></div></div>
+
+<p>The interpretation of the above rules is illustrated by the following
+example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 3 4 EACH first sum 4 5 6
+= (2 3 4) EACH first sum (4 5 6)          (strand rule)
+= (2 3 4)(EACH first) sum (4 5 6)         (transformer precedence)
+= (2 3 4)(EACH first)(sum (4 5 6))        (prefix operations rule)
+= (2 3 4)(EACH first) 15                  (meaning of sum)
+= (EACH first) ((2 3 4) 15)               (infix rule)
+= (first (2 3 4)) (first 15)              (meaning of each)
+= 2 15                                    (meaning of first)
+</code></pre></div></div>
+
+<p>A feature of Nial syntax is that all operations are implicitly unary and
+their interpretation when used in an infix way is determined by the
+above rules rather than by an operation precedence table. Thus,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2 + 3 * 4
+= + (2 3) * 4
+= 5 * 4
+= * (5 4)
+= 20
+</code></pre></div></div>
+
+<p>This example demonstrates that infix uses of operations are evaluated
+left to right without precedence. The same expression in Pascal or C
+would be evaluated by doing the multiplication first.</p>
+
+<h2 id="bracket-notation">Bracket Notation</h2>
+
+<p>Nial syntax has a second way to construct a list. It is called
+bracket-comma notation. The expression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[34,275,86,-52]
+</code></pre></div></div>
+
+<p>has the same meaning as the strand</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>34 275 86 -52
+</code></pre></div></div>
+
+<p>The bracket-comma notation has the advantage that it can represent lists
+of length one and length zero. Thus,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[235]
+</code></pre></div></div>
+
+<p>denotes the list of length one holding the atom 235 as its item and the
+empty list Null is denoted by</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[]
+</code></pre></div></div>
+
+<p>There is a corresponding syntactic object for operations. It is called
+an atlas (a list of maps). An atlas applies each component operation to
+the argument producing a list of results. Thus,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[sin,cos,sqrt] 3.14
+</code></pre></div></div>
+
+<p>is equivalent to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[sin 3.14,cos 3.14,sqrt 3.14]
+</code></pre></div></div>
+
+<p>An elegant example of atlas notation is to rewrite the definition of
+average as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>average IS / [sum,tally]
+</code></pre></div></div>
+
+<p>The equivalence with the earlier definition can be demonstrated as
+follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>average A
+= (/ [sum,tally]) A
+= / ([sum,tally] A)                  (prefix operations rule)
+= / [sum A,tally A]                  (atlas rule)
+= / (sum A) (tally A)                (strand equivalence)
+= (sum A) / ( tally A)               (infix rule)
+</code></pre></div></div>
+
+<p>The atlas notation is mainly used as a shorthand for describing
+operations without the need to explicitly name the argument. It is also
+used to form an operation argument for a transformer that uses two or
+more operations.</p>
+
+<h2 id="addresses-and-indexing">Addresses and Indexing</h2>
+
+<p>In procedural programming languages, arrays are treated as subscripted
+variables. A name declared to be an array is said to denote a collection
+of variables, each of which can be assigned a value independently. In
+such languages, there is a notation for denoting one variable from the
+collection, similar to the idea of using a subscript in mathematical
+notation. In such languages, array computations use looping constructs
+to do a computation that accesses all the items of an array.</p>
+
+<p>In Nial, arrays are implicitly given an addressing scheme. For the table
+T, the addresses are given by the operation <em>grid</em> as an array of the same
+shape as T, with each location holding its own address.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    T := 3 4 reshape count 12
+1  2  3  4
+5  6  7  8
+9 10 11 12
+
+
+grid T
++---------------+
+|0 0|0 1|0 2|0 3|
++---+---+---+---|
+|1 0|1 1|1 2|1 3|
++---+---+---+---|
+|2 0|2 1|2 2|2 3|
++---------------+
+</code></pre></div></div>
+
+<p>The addresses of an array are integers for a 1-dimensional array (a
+list) or lists of integers for other arrays. The numbering scheme uses
+zero-origin counting. For the table T above, the addresses are lists of
+length two. The list A below has addresses that are integers.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     set "diagram;
+     A := count 5
++---------+
+|1|2|3|4|5|
++---------+
+
+
+     grid A
++---------+
+|0|1|2|3|4|
++---------+
+</code></pre></div></div>
+
+<p>The operation <em>pick</em> is the fundamental selection operation in Nial based
+on addressing. The expression</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     1 2 pick T
+7
+</code></pre></div></div>
+
+<p>selects the item of T at address 1 2. In picking from the list A, either
+an integer or a list of one integer corresponding to an address can be
+used:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     4 pick A
+5
+
+
+     [4] pick A
+5
+</code></pre></div></div>
+
+<p>The operation <em>choose</em> can be used to select multiple items from an array.
+For example, in the expression below, <em>choose</em> returns the items of T at
+the three addresses in the left argument:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     [1 2,2 3,0 0] choose T
+7 12 1
+</code></pre></div></div>
+
+<p>Nial also has an indexing notation similar to subscript notation in
+other languages. The following expression selects the item of T at
+address 1 2.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     T@(1 2)
+7
+</code></pre></div></div>
+
+<p>This form of selection is called at-indexing. One difference between it
+and using <em>pick</em> for selection is that <em>pick</em> can be modified using a
+transformer because it is an operation but the @ symbol is a syntactic
+construct and cannot be modified by a transformer. Also the at-notation
+can only be used with a variable, whereas pick can select from the
+result of any expression.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    
+      <li><a href="/Nial_Development/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 John Gibbons. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/Nial_Development/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/Nial_Development/assets/js/lunr/lunr.min.js"></script>
+<script src="/Nial_Development/assets/js/lunr/lunr-store.js"></script>
+<script src="/Nial_Development/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
