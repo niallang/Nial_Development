@@ -144,7 +144,7 @@ The following links are for online discussion groups relating to Nial.
 
 There is a discord server for APL inspired languages and it includes a Nial discussion channel
 
-       https://discord.gg/NYxAVx9d
+       [Nial Discord Server](https://discord.gg/NYxAVx9d)
 
 Join in and discuss aspects of Nial that interest you, problems you are having with Nial and
 directions you would like to see Nial go.
