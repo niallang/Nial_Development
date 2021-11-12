@@ -1,7 +1,10 @@
 # The Nial Language
 ![Image](./NialLogo.jpg?raw=true)
 
+## Links
+
 [**Web Site**](https://nial-array-language.org)
+
 [**Nial Discord Server**](https://discord.gg/NYxAVx9d)
 
 # Introduction
