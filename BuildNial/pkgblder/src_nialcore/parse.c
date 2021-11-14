@@ -3277,7 +3277,7 @@ WHILE_EXPR(nialptr * tree)
 
     loopcount--;
     if (res == SUCCEED) { /* look for the ENDWHILE */
-      if (!equalsymbol(nexttoken, r_ENDWHILE)) {
+      if (!equalsymbol(nexttoken, r_ENDWHILE) && !equalsymbol(nexttoken, r_END)) {
         error(exp_endwhile, 53);  /* 53 */
         freeup(t1);
         freeup(t2);
@@ -3386,7 +3386,7 @@ REPEAT_EXPR(nialptr * tree)
     res = EXPRESSION(&t2); /* attempt to parse an expression */
 
     if (res == SUCCEED) { /* look for the ENDREPEEAT */
-      if (!equalsymbol(nexttoken, r_ENDREPEAT)) {
+      if (!equalsymbol(nexttoken, r_ENDREPEAT) && !equalsymbol(nexttoken, r_END)) {
         error(exp_endrepeat, 61); /* 61 */
         freeup(t1);
         freeup(t2);
@@ -3541,7 +3541,7 @@ FOR_EXPR(nialptr * tree)
     loopcount--;
     if (res == SUCCEED) {
       /* look for the ENDFOR */
-      if (!equalsymbol(nexttoken, r_ENDFOR)) {
+      if (!equalsymbol(nexttoken, r_ENDFOR) && !equalsymbol(nexttoken, r_END)) {
         error(exp_endfor, 71);  /* 71 */
         freeup(t1);
         freeup(t2);
@@ -3642,11 +3642,11 @@ IF_EXPR(nialptr * tree)
   apush(t1);  /* push the then clause */
   cnt++;
 
-/* loop to parse indefinite number of ELSEIF <EXPR> THEN <EXPR_SEQ> */
+  /* loop to parse indefinite number of ELSEIF <EXPR> THEN <EXPR_SEQ> */
   
-while (equalsymbol(nexttoken, r_ELSEIF)) {
+  while (equalsymbol(nexttoken, r_ELSEIF)) {
     accept1(); /* accept the ELSEIF */
-
+    
     res = EXPRESSION(&t1); /* attempt to parse an expression */
     if (res != SUCCEED) {
       if (res == FAIL) { /* report an error */
@@ -3655,12 +3655,12 @@ while (equalsymbol(nexttoken, r_ELSEIF)) {
       ite_cleanup(cnt); /* use if-then-else cleanup routine to fix undefined */
       return (ERROR);
     }
-
+    
     /* found an expression, push it as expr seq */
     t1 = st_exprseq(t1);     /* to assist debugging code */
     apush(t1);
     cnt++;
-
+    
     /* look for THEN */
     if (!equalsymbol(nexttoken, r_THEN)) {
       error(exp_then, 81);   /* 81 */
@@ -3678,7 +3678,7 @@ while (equalsymbol(nexttoken, r_ELSEIF)) {
       ite_cleanup(cnt); /* use if-then-else cleanup routine to fix undefined */
       return (ERROR);
     }
-
+    
     /* found an expression sequence */
     apush(t1);
     cnt++;
@@ -3702,7 +3702,7 @@ while (equalsymbol(nexttoken, r_ELSEIF)) {
   }
 
   /* look for the ENDIF */
-  if (!equalsymbol(nexttoken, r_ENDIF)) {
+  if (!equalsymbol(nexttoken, r_ENDIF) && !equalsymbol(nexttoken, r_END)) {
     error(exp_endif, 84);    /* 84 */
     ite_cleanup(cnt);
     return (ERROR);
@@ -3884,7 +3884,7 @@ CASE_EXPR(nialptr * tree)
       slist = nial_extend(slist, Nulltree); /* put in null case  */
 
     /* look for ENDCASE token */
-    if (!equalsymbol(nexttoken, r_ENDCASE)) {
+    if (!equalsymbol(nexttoken, r_ENDCASE) && !equalsymbol(nexttoken, r_END)) {
       error(exp_endcase, 90);/* 90 */
       freeup(t1);
       freeup(clist);
@@ -4266,7 +4266,7 @@ proderror(int messno)
         mess = "expecting then: ";
         break;
     case exp_endif:
-        mess = "expecting endif,elseif, or else: ";
+        mess = "expecting endif,end,elseif, or else: ";
         break;
     case exp_eseq:
         mess = "expecting expression sequence: ";
@@ -4275,19 +4275,19 @@ proderror(int messno)
         mess = "expecting end: ";
         break;
     case exp_endwhile:
-        mess = "expecting endwhile: ";
+        mess = "expecting endwhile or end: ";
         break;
     case exp_do:
         mess = "expecting do: ";
         break;
     case exp_endrepeat:
-        mess = "expecting endrepeat: ";
+        mess = "expecting endrepeat or end: ";
         break;
     case exp_until:
         mess = "expecting until: ";
         break;
     case exp_endfor:
-        mess = "expecting endfor: ";
+        mess = "expecting endfor or end: ";
         break;
     case exp_with:
         mess = "expecting with: ";
@@ -4302,7 +4302,7 @@ proderror(int messno)
         mess = "expecting colon: ";
         break;
     case exp_endcase:
-        mess = "expecting constant or endcase: ";
+        mess = "expecting constant or endcase oe end: ";
         break;
     case is_defined:
         mess = "name already defined: ";
