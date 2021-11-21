@@ -229,10 +229,8 @@ static nialint child_proc_count(nialint child) {
                     NULL,
                     &totalBytesAvail,
                     NULL)) {
-    ULARGE_INTEGER count;
     
-    memcpy(&count, &totalBytesAvail, sizeof(ULARGE_INTEGER));
-    return (nialint)(count.QuadPart&0xFFFFFFFF);
+    return (nialint)totalBytesAvail;
   } else {
     return -1;
   }

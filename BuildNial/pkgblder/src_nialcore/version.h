@@ -38,7 +38,7 @@
 
 /* Version 6.3 is the public domain version released as open source */
 
-#define nialversion	" 7.0"
+#define nialversion	" 7.0.1"
 
 
 /*
