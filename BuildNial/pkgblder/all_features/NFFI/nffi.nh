@@ -1,0 +1,5 @@
+NFFI U nffi_new_cif inffi_new_cif
+NFFI U nffi_load_lib inffi_load_lib
+NFFI U nffi_get_sym inffi_get_sym
+NFFI U nffi_free inffi_free
+

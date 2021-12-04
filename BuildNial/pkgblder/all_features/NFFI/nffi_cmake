@@ -1,0 +1,2 @@
+set(NIAL_LIBS ${NIAL_LIBS} ffi)
+
