@@ -434,7 +434,7 @@ static inline ffi_type *get_ffi_type(unsigned int idx) {
   } else {
     int iref = idx - num_basic_types;
 
-    if (VALID_CREF(iref, NFFI_TYPE)) {
+    if (VALID_CREF_TYPE(iref, NFFI_TYPE)) {
       return (ffi_type*)(crefs[iref]->ref_ptr);
     } else {
       return NULL;
@@ -490,7 +490,7 @@ void inffi_free(void) {
   nialptr x = apop();
 
   if (kind(x) == inttype) {
-    if (VALID_CREF_INDEX(intval(x))) {
+    if (VALID_CREF_INDEX(x)) {
       free_cref(intval(x));
       apush(True_val);
     } else {
@@ -541,14 +541,14 @@ void inffi_new_cif(void) {
     goto error_exit;
   }
 
-  rtype = get_ffi_type((unsigned int)intval(n_rtype));
+  rtype = get_ffi_type((n_rtype);
   if (rtype == NULL) {
     apush(makefault("?invalid rtype"));
     goto error_exit;
   }
 
   for (i = 0; i < numargs; i++) {
-    ffi_type *ft = get_ffi_type(fetch_int(n_atypes, i));
+    ffi_type *ft = get_ffi_type(fetch_val(n_atypes, i));
 
     if (ft == NULL) {
       apush(makefault("?invalid atype"));
@@ -839,8 +839,8 @@ void inffi_call(void) {
   n_fn = fetch_array(x, 1);
   n_avalues = fetch_array(x, 2);
 
-  if (kind(n_cif) != inttype || !VALID_CREF(intval(n_cif), NFFI_CIF)
-      || kind(n_fn) != inttype || !VALID_CREF(intval(n_fn), NFFI_FUNC)) {
+  if (kind(n_cif) != inttype || !VALID_CREF(n_cif, NFFI_CIF)
+      || kind(n_fn) != inttype || !VALID_CREF(n_fn, NFFI_FUNC)) {
     apush(makefault("?arg_types invalid"));
     goto error_exit;
   }
@@ -926,7 +926,7 @@ void inffi_get_sym(void) {
     if (istext(nsymn) && kind(nlib) == inttype) {
       nialint lid = intval(nlib);
 
-      if (VALID_CREF(lid, NFFI_LIB)) {
+      if (VALID_CREF(nlib, NFFI_LIB)) {
 	void* psym = dlsym( crefs[lid]->ref_ptr, pfirstchar(nsymn));
       
 	if(psym == NULL) {
