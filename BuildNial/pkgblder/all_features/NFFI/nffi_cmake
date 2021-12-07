@@ -1,2 +1,3 @@
+link_directories("/usr/local/lib")
 set(NIAL_LIBS ${NIAL_LIBS} ffi)
 

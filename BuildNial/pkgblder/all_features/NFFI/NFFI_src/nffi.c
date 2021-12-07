@@ -30,7 +30,7 @@
 /* SJLIB */
 #include <setjmp.h>
 
-/* MATHLIB */
+/* M38ATHLIB */
 #include <math.h>
 
 /* Q'Nial header files */
@@ -44,6 +44,17 @@
 #include <string.h>
 
 #include <ffi.h>
+
+
+static inline nialptr makepair(nialptr x, nialptr y) {
+  nialint reslen = 2;
+  nialptr res = new_create_array(atype, 1, 0, &reslen);
+
+  store_array(res, x, 0);
+  store_array(res, y, 1);
+
+  return res;
+}
 
 
 /** ===================== C Reference Support ======================= 
@@ -73,6 +84,7 @@ static int nffi_initialised = 0;
 #define NFFI_LIB               3             /* an open C object library */
 #define NFFI_CPTR              4             /* a C pointer value */
 #define NFFI_BUILTIN           5             /* a builtin type */
+#define NFFI_FUNC              6             /* C Function ptr */
 
 /*
  * Define flags for references 
@@ -427,18 +439,11 @@ static void nffi_initialise_system() {
  * Return the type pointer of either a basic type or
  * a created type
  */ 
-static inline ffi_type *get_ffi_type(unsigned int idx) {
-
-  if (idx < num_basic_types) {
-    return nffi_type_table[idx];
+static inline ffi_type *get_ffi_type(nialptr idx) {
+  if (VALID_CREF_TYPE(idx, NFFI_TYPE)) {
+    return (ffi_type*)(crefs[intval(idx)]->ref_ptr);
   } else {
-    int iref = idx - num_basic_types;
-
-    if (VALID_CREF_TYPE(iref, NFFI_TYPE)) {
-      return (ffi_type*)(crefs[iref]->ref_ptr);
-    } else {
-      return NULL;
-    }
+    return NULL;
   }
 }
 
@@ -504,8 +509,22 @@ void inffi_free(void) {
   return;
 }
 
-   
-  
+
+
+nialptr fetch_val(nialptr x, nialint i) {
+  switch(kind(x)) {
+  case atype:
+    return fetch_array(x,i);
+  case inttype:
+    return createint(fetch_int(x, i));
+  case realtype:
+    return createreal(fetch_real(x, i));
+  default:
+    return invalidptr;
+  }
+}
+
+
 /** 
  * Create a new cif from Nial data. This creates a calling interface 
  * based on argument and return types which can be used over and over 
@@ -541,7 +560,7 @@ void inffi_new_cif(void) {
     goto error_exit;
   }
 
-  rtype = get_ffi_type((n_rtype);
+  rtype = get_ffi_type(n_rtype);
   if (rtype == NULL) {
     apush(makefault("?invalid rtype"));
     goto error_exit;
@@ -839,8 +858,8 @@ void inffi_call(void) {
   n_fn = fetch_array(x, 1);
   n_avalues = fetch_array(x, 2);
 
-  if (kind(n_cif) != inttype || !VALID_CREF(n_cif, NFFI_CIF)
-      || kind(n_fn) != inttype || !VALID_CREF(n_fn, NFFI_FUNC)) {
+  if (kind(n_cif) != inttype || !VALID_CREF_TYPE(n_cif, NFFI_CIF)
+      || kind(n_fn) != inttype || !VALID_CREF_TYPE(n_fn, NFFI_FUNC)) {
     apush(makefault("?arg_types invalid"));
     goto error_exit;
   }
@@ -926,7 +945,7 @@ void inffi_get_sym(void) {
     if (istext(nsymn) && kind(nlib) == inttype) {
       nialint lid = intval(nlib);
 
-      if (VALID_CREF(nlib, NFFI_LIB)) {
+      if (VALID_CREF_TYPE(nlib, NFFI_LIB)) {
 	void* psym = dlsym( crefs[lid]->ref_ptr, pfirstchar(nsymn));
       
 	if(psym == NULL) {
