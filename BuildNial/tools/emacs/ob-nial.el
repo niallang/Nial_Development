@@ -123,15 +123,15 @@ Emacs-lisp table, otherwise return the results as a string."
   "If there is not a current inferior-process-buffer in SESSION then create.
 Return the initialized session."
   (let ((com (nial-console-ensure-session)))
-	(comint-send-string com "setprompt ''\n") ))
+	(comint-send-string com "setprompt ''\n\n") ))
 
 
-(defun org-babel-nial-eval  ; mostly taken from ob-J.el
-  "Sends STR to the `nial-console-cmd' session and exectues it."
+(defun org-babel-nial-eval  (&optional nialtext)                  ; mostly taken from ob-J.el
+  "Sends STR to the `nial-console-cmd' session and executes it."
   (let ((session (nial-console-ensure-session)))
     (with-current-buffer (process-buffer session)
       (goto-char (point-max))
-      (insert (format "\n%s\n\r" str))
+      (insert (format "\n%s\n\n" str))
       (let ((beg (point)))
 	(comint-send-input)
 	(sit-for .1)

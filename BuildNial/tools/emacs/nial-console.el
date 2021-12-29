@@ -47,13 +47,13 @@
   :group 'nial
   :prefix "nial-console-")
 
-(defcustom nial-console-cmd "/home/johng/bin/qnial7"
+(defcustom nial-console-cmd "nial"
   "Name of the executable used for the nial session"
   :type 'string
   :group 'nial-console)
 
-(defcustom nial-console-cmd-args '()
-  "Arguments to be passed to the j-console-cmd on start"
+(defcustom nial-console-cmd-args '("-b")
+  "Arguments to be passed to the nial-console-cmd on start"
   :type 'string
   :group 'nial-console)
 
@@ -134,7 +134,7 @@ the containing buffer"
         (session (nial-console-ensure-session)))
     (pop-to-buffer (process-buffer session))
     (goto-char (point-max))
-    (insert-string (format "\n%s\n" region))
+    (insert (format "\n%s\n\n" region))
     (comint-send-input)))
 
 (defun nial-console-execute-line ()

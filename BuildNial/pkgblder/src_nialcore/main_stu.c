@@ -80,6 +80,13 @@ extern void cleanup_ws(void);
 static int latenttest(void);
 
 
+/*
+ * Define the input mode the Nial console
+ */
+int batch_input_mode = false;
+static void load_batch_text();   /* forward declare */
+
+
 /* These are needed for CMDLINE which is in userops.c  */
 
 
@@ -266,8 +273,8 @@ main(int argc, char *memin[], char **envp)
       else
         exit_cover1("missing workspace file name after -lws option", NC_FATAL);
     }
-    else
-    if (strlen(memin[i]) == 2 && strcmp(memin[i], "-i") == 0) {
+    
+    else if (strlen(memin[i]) == 2 && strcmp(memin[i], "-i") == 0) {
       /* use interactive mode */
       quiet = false;
       messages_on = true;
@@ -277,6 +284,19 @@ main(int argc, char *memin[], char **envp)
       nouserinterrupts = false;
       keeplog = true;
       i++;
+    }
+        
+    else if (strlen(memin[i]) == 2 && strcmp(memin[i], "-b") == 0) {
+	/* use pipe input mode */
+	batch_input_mode = true;
+	quiet = true;
+	messages_on = true;
+	debugging_on = true;
+	triggered = true;
+	nomainloop = false;
+	nouserinterrupts = false;
+	keeplog = true;
+	i++;
     }
         
     else
@@ -481,11 +501,22 @@ retry: /* start over point for the main loop */
       
       topstack = (-1);   /* resets the stack */
 
-    /* prompt to get inputline
-       We use rl_gets so that the input history is available in the top level loop */
+
+      if (batch_input_mode == true) {
+	  /* 
+	   * Read a block of text terminated by a blank line and 
+	   * leave it on the stack as a single line
+	   */
+	  load_batch_text();
+      } else {
+	  /*
+	   * prompt to get inputline and leave it on the stack
+	   * We use rl_gets so that the input history is available in the top level loop 
+	   */
+	  rl_gets(nprompt, inputline);
+	  mkstring(inputline);
+      }
       
-      rl_gets(nprompt, inputline);
-      mkstring(inputline);
       checksignal (NC_CS_INPUT);
       if (keeplog) {
           writelog(nprompt, strlen(nprompt), false);
@@ -717,6 +748,60 @@ cleanup:
 
   exit(0);
   return 1;                  /* to satisfy syntax error checking */
+}
+
+
+/**
+ * Read a block of lines termimated by a whitespace line from the input file
+ * and leave them as a single line of text on the stack  
+ */
+static void load_batch_text() {
+    int nolines = 0, all_whitespace = false, i;
+    char buffer[4096];
+
+    /* loop to pick up lines until a whitespace line occurs */
+    while (true) {
+	char *line = fgets(buffer, 4096, stdin);
+
+	/* Check for EOF */
+	if (line == NULL) {
+	    if (nolines > 0) {
+		/* We already have lines */
+		mklist(nolines);
+		ilink();
+		return;
+	    } else {
+		/* No lines and end of file */
+		mkstring("bye;");
+		return;
+	    }
+	}
+
+	/* remove CR & LF from the line and check for non-whitespace characters */
+	all_whitespace = true;
+	for (i = 0; i < strlen(line); i++) {
+	    int ch = buffer[i] & 0xFF;
+	    if (ch == '\r' || ch == '\n')
+		buffer[i] = ' ';
+	    if (ch > 32)
+		all_whitespace = false;
+	}
+
+	if (all_whitespace == true) {
+	    /* If there are lines then send them off, otherwise keep reading */
+	    if (nolines > 0) {
+		mklist(nolines);
+		ilink();
+		return;
+	    }
+	} else {
+	    /* If not all whitespace the add to pool */
+	    mkstring(line);
+	    nolines++;
+	}
+
+    }
+
 }
 
 
