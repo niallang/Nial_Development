@@ -86,9 +86,24 @@ static int latenttest(void);
 int batch_input_mode = false;
 static void load_batch_text();   /* forward declare */
 
+/**
+ * Check for a whitespace string
+ */
+int isAllWhitespace(char *p) {
+  int aws = true;
+
+  while(*p != 0) {
+    if (*p++ > 32) {
+      aws = false;
+      break;
+    }
+  }
+
+  return aws;
+}
+
 
 /* These are needed for CMDLINE which is in userops.c  */
-
 
 char      **global_argv = NULL;
 int         global_argc;
@@ -501,7 +516,7 @@ retry: /* start over point for the main loop */
       
       topstack = (-1);   /* resets the stack */
 
-
+      /* Read based on the current input mode */ 
       if (batch_input_mode == true) {
 	  /* 
 	   * Read a block of text terminated by a blank line and 
@@ -514,7 +529,42 @@ retry: /* start over point for the main loop */
 	   * We use rl_gets so that the input history is available in the top level loop 
 	   */
 	  rl_gets(nprompt, inputline);
-	  mkstring(inputline);
+
+	  if (1 <= strlen(inputline) && inputline[0] == '!' && isAllWhitespace(inputline+1)) {
+	    /* a block of input lines */
+	    int nolines = 0;
+
+	    rl_gets(".... ", inputline);
+	    for (nolines = 0; !isAllWhitespace(inputline); nolines++) {
+	      /* Remove all CTRL chars */
+	      unsigned char *p;
+	      for (p = inputline; *p != 0; p++)
+		if (*p < 32)
+		  *p = 32;
+
+	      /* Add an extra space */
+	      *p++ = ' ';
+	      *p = 0;
+
+	      /* Add the modified line to the list */
+	      mkstring(inputline);
+
+	      /* get the next line etc */
+	      rl_gets(".... ", inputline);
+	    }
+
+	    if (nolines > 0) {
+	      /* Combine the lines for evaluation */
+	      mklist(nolines);
+	      ilink();
+	    } else {
+	      /* pass the whitespace line across */
+	      mkstring(inputline);
+	    }
+	  } else {
+	    /* Standard single line of input */
+	    mkstring(inputline);
+	  }
       }
       
       checksignal (NC_CS_INPUT);
