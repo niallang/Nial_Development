@@ -548,6 +548,10 @@ retry: /* start over point for the main loop */
 
 	      /* Add the modified line to the list */
 	      mkstring(inputline);
+	      if (keeplog) {
+		writelog(nprompt, strlen(nprompt), false);
+		writelog(inputline, strlen(inputline), true);
+	      }
 
 	      /* get the next line etc */
 	      rl_gets(".... ", inputline);
@@ -572,6 +576,7 @@ retry: /* start over point for the main loop */
           writelog(nprompt, strlen(nprompt), false);
           writelog(inputline, strlen(inputline), true);
       }
+      
 #ifdef DEBUG
     { nialint  total;
       total = checkavailspace();
