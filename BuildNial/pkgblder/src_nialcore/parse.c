@@ -4302,7 +4302,7 @@ proderror(int messno)
         mess = "expecting colon: ";
         break;
     case exp_endcase:
-        mess = "expecting constant or endcase oe end: ";
+        mess = "expecting constant or endcase or end: ";
         break;
     case is_defined:
         mess = "name already defined: ";

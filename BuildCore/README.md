@@ -78,8 +78,8 @@ This will display a header like:
 
    to end the *nial* interactive session.
 
-4. Copy the nialcore executable to the pkgbldr subdirectory of the BuildNial directory using
+4. Copy the nialcore executable to the pkgblder subdirectory of the BuildNial directory using
 
-   $ cp nialcore ../../BuildNial/pkgbldr
+   $ cp nialcore ../../BuildNial/pkgblder
 
 You are now ready to build the full QNial7 using pkgblder in BuildNial. See the README.md in BuildNial for instructions.

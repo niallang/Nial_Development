@@ -1,0 +1,6 @@
+BuildCore/build/*
+BuildNial/build/*
+BuildNial/src/*
+BuildNial/pkgblder/nial_basic
+BuildNial/pkgblder/nialcore
+auto.nlg
