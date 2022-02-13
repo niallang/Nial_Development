@@ -133,6 +133,9 @@ QNial7. If no existing executable is available for the platform you are
 using then you need to build the nialcore executable using BuildCore. 
 Follow the directions given in the README.md file in BuildCore.
 
+There is a script at [./build.sh](./build.sh) for building Nial if you need to
+build from scratch, and have all the dependencies.
+
 If you are building for a new platform or want to add features to QNial7
 that are not in the executable you have then you use directory BuildNial. 
 The README.md in BuildNial describes the process for selecting additional features 
@@ -146,10 +149,9 @@ The following links are for online discussion groups relating to Nial.
 
 ### Discord
 
-There is a discord server for APL inspired languages and it includes a Nial discussion channel
-
-       [Nial Discord Server](https://discord.gg/NYxAVx9d)
-
+There is a Discord server for APL inspired languages and it includes a Nial discussion channel:  
+[Nial Discord Server](https://discord.gg/SDTW36EhWF)  
+It is also bridged to Matrix at `#nial:matrix.org`, or [on the Element client](https://app.element.io/#/room/#nial:matrix.org).  
 Join in and discuss aspects of Nial that interest you, problems you are having with Nial and
 directions you would like to see Nial go.
 
