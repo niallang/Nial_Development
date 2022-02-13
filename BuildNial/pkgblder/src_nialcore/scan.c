@@ -159,7 +159,7 @@ static char class1[CharacterCnt] =
 
 #ifdef VMCMS
 
-/* code to support EBCIDIC to ASCII trnaslation for the IBM VMCMS mainfrome version. */
+/* code to support EBCDIC to ASCII translation for the IBM VMCMS mainframe version. */
 
 char        ebctoasc[256] = {
   '\000', '\001', '\002', '\003', '\024', '\011', '\377', '\377',
