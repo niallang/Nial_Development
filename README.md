@@ -149,8 +149,9 @@ The following links are for online discussion groups relating to Nial.
 
 ### Discord
 
-There is a discord server for APL inspired languages and it includes a Nial discussion channel:  
+There is a Discord server for APL inspired languages and it includes a Nial discussion channel:  
 [Nial Discord Server](https://discord.gg/SDTW36EhWF)  
+It is also bridged to Matrix at `#nial:matrix.org`, or [on the Element client](https://app.element.io/#/room/#nial:matrix.org).  
 Join in and discuss aspects of Nial that interest you, problems you are having with Nial and
 directions you would like to see Nial go.
 
