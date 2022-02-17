@@ -163,7 +163,7 @@ main(int argc, char *memin[], char **envp)
     
   /* switch settings if -i is not indicated in command line */
     
-  quiet = true;  
+  quiet = false;  
   debugging_on = false;
   triggered = false;
   nomainloop = true;
@@ -867,7 +867,7 @@ static void
 print_syntax()
 {
   fprintf(stderr, "\n"
-  "SYNTAX: nial  [(+|-)size Wssize] [-defs Filename] [-i] [-lws WSName] [-h]\n"
+  "SYNTAX: nial  [(+|-)size Wssize] [-defs Filename] [-i] [-lws WSName] [-h] [-b]\n"
   "\n"
   "-size Wssize\n"
   "      Begin with a workspace size of Wssize words. A suffix of G, M or K\n"
@@ -884,6 +884,8 @@ print_syntax()
   "      Execute in interactive mode with a top level loop.\n"
   "-h\n"
   "      Display command line syntax (this text).\n"
+  "-b\n"
+  "      Execute in batch mode, for executing Nial from stdin non-interactively.\n"
   "\n"
   "Examples:\n"
   "   nial -i\n"
