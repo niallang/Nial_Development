@@ -22,19 +22,21 @@ of a comparison. The form is as follows:
 The CASE construct has the following form:
 
    CASE   <expr> FROM
-     L0:  <expr sequence> END
-     L1:  <expr sequence> END
-     L2:  <expr sequence> END
+     L0:       <expr sequence> END
+     L1:       <expr sequence> END
+     L2 | L3:  <expr sequence> END
      ELSE <expr sequence>
    ENDCASE
 
-.n Month := 3;
+where the vertical bar (|) matches on either of its labels.
+
+.n Month := 4;
 
 .b CASE Month FROM
-      1: Month_name := "January; END
-      2: Month_name := "February;END
-      3: Month_name := "March;   END
-   ELSE  Month_name := phrase 'April through December';
+      1:     Month_name := "January;       END
+      2:     Month_name := "February;      END
+      3 | 4: Month_name := "March/April;   END
+   ELSE  Month_name := phrase 'May through December';
    ENDCASE;
 .e Month_name
 
@@ -126,4 +128,3 @@ with the value of the simple expression following the reserved word EXIT.
    ENDFOR ;
 .e write "Fib Fibonacci ;
 .p
-

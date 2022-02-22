@@ -972,7 +972,8 @@ deparse(nialptr br)
               clist,
               elist,
               idlist,
-              tr;
+              tr,
+              labelList;
   nialint     i,
               cnt,
               ifi,
@@ -1263,9 +1264,15 @@ deparse(nialptr br)
         else
           limit = true;
         /* loop over the cases deparsing the constant, inserting the ":",
+           inserting the "|"s if they're present,
            deparsing the expression sequence and inserting END */
         for (in = 0; in < n; in++) {
-          deparse(fetchasarray(clist, in));
+          labelList = fetchasarray(clist, in);
+          deparse(fetchasarray(labelList, 0));
+          for (i = 1; i < tally(labelList); i++) {
+            emitrwd(r_BAR);
+            deparse(fetchasarray(labelList, i)); 
+          }
           emitrwd(r_COLON);
           emitincrin();
           emiteol();

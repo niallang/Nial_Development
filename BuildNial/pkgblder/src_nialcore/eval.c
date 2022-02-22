@@ -184,7 +184,7 @@ static int nct_in_catch_throw();
     must be "closed with its environment". This means that the pointers to
     all local scopes must be saved. When a closure is applied the stack is used
     to hold the current stack pointers while the ones bundled with the
-   operation are installed. The routines setup_env and restore_env are used
+    operation are installed. The routines setup_env and restore_env are used
     to set up for a closure application and to clean up after it.
 
     The stack is also used to "protect" temporary values since an array
