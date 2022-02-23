@@ -3742,16 +3742,20 @@ ite_cleanup(int cnt)
 /*
    ROUTINE NAME :   CASE_EXPR
 
-            |------|        |------|             |---|              |-----|          |---------|
-case_expr ->| CASE |->expr->| FROM |--^->const-->| : |--->expr_seq->| END |--|--|-^->| ENDCASE |----->
-            |------|        |------|  |          |---|              |-----|  |  | |  |---------|
-                                      |<-------------------------------------|  | |
-                                                                                | |
-                                      |<----------------------------------------| |
-                                      |  |------|                   |-----|       |
-                                      |->| ELSE |-------->expr_seq->| END |-------|
-                                         |------|                   |-----|
-
+            |------|        |------|                 |---|              |-----|          |---------|
+case_expr ->| CASE |->expr->| FROM |--^-^-const->-|->| : |--->expr_seq->| END |--|--|-^->| ENDCASE |----->
+            |------|        |------|  | |         |  |---|              |-----|  |  | |  |---------|
+                                      | |  |---|  |                              |  | |
+                                      | |<-| | |<-|                              |  | |
+                                      |    |---|                                 |  | |
+                                      |                                          |  | |
+                                      |<-----------------------------------------|  | |
+                                                                                    | |
+                                      |<--------------------------------------------| |
+                                      |  |------|                       |-----|       |
+                                      |->| ELSE |------------>expr_seq->| END |-------|
+                                         |------|                       |-----|
+  
 
 */
 
@@ -3764,9 +3768,11 @@ CASE_EXPR(nialptr * tree)
               label = Null,
               clist,
               slist,
-              clistvals;
+              clistvals,
+              valstemp;
   int         res,
-              cont;
+              cont,
+              i;
 
 #ifdef DEBUG
   if (debug)
@@ -3795,16 +3801,29 @@ CASE_EXPR(nialptr * tree)
 
     /* loop looking for expression sequences preceded by a constant and ":" */
     while (cont) {
+      label = Null;
       /* look for the constant */
       if (tokenprop >= constprop) {
-        label = b_constant(tokenprop - constprop, nexttoken);
+        label = nial_extend(label, b_constant(tokenprop - constprop, nexttoken));
         res = SUCCEED;
       }
       else
         res = FAIL;
 
       if (res == SUCCEED) {
-        accept1(); /* accept the contant token and look for the COLON */
+        accept1(); /* accept the contant token */
+
+        // look for alternate labels
+        while (equalsymbol(nexttoken, r_BAR)) {
+          accept1(); // accept the "|" token
+          // look for the constant
+          if (tokenprop >= constprop)
+            label = nial_extend(label, b_constant(tokenprop - constprop, nexttoken));
+          else goto err; // no constant
+          accept1(); // accept the constant token
+        }
+
+        // look for the COLON
         if (!equalsymbol(nexttoken, r_COLON)) {
           error(exp_colon, 86); /* 86 */
           freeup(t1);
@@ -3815,7 +3834,7 @@ CASE_EXPR(nialptr * tree)
           return (ERROR);
         }
 
-        accept1(); /* accpet the COLON */
+        accept1(); /* accept the COLON */
 
         res = EXPR_SEQ(&t2);  /* attempt to parse an epxression sequence */
 
@@ -3836,8 +3855,12 @@ CASE_EXPR(nialptr * tree)
 
           /* update the list of cases */
           clist = nial_extend(clist, label);
-          eval(label);
-          clistvals = nial_extend(clistvals, apop());
+          valstemp = Null;
+          for (i = 0; i < tally(label); i++) {
+            eval(fetchasarray(label, i));
+            valstemp = nial_extend(valstemp, apop());
+          }
+          clistvals = nial_extend(clistvals, valstemp);
           slist = nial_extend(slist, t2);
         }
         else {
@@ -3855,8 +3878,10 @@ CASE_EXPR(nialptr * tree)
           return (ERROR);
         }
       }
-      else
+      else {
+      err:
         cont = false;
+      }
     }  /* done the loop */
 
     /* look for an ELSE token */
