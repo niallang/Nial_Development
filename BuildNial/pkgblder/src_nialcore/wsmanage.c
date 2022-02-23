@@ -495,7 +495,17 @@ loaddefs(int fromfile, char *fname, int mode)
           apop();            /* to remove the end of file marker */
           repeatloop = false;
           break;             /* to end read loop */
-        }
+        } else {
+	  /* 
+	   * readfileline removes any cr or ln at end of line and the goal
+	   * of loaddefs is to link all input lines. We must add a space
+	   * at the end of the line for safety
+	   */
+	  mkstring(" ");
+	  mklist(2);
+	  ilink();
+
+	}
       }
 
       else {
