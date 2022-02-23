@@ -784,8 +784,10 @@ recur:
             nialptr     ca,
                         val,
                         body,
-                        exprseqs;
-            nialint     in = 0;
+                        exprseqs,
+                        labelList;
+            nialint     in,
+                        i;
             int         found = false;
             /* eval the case test expresssion */
 #ifdef EVAL_DEBUG
@@ -797,8 +799,11 @@ recur:
             ca = get_svals(exp);
             /* find constant that corresponds to expr value    */
             /* if none, in = tally(ca) selects else case in expr_seq */
-            while (!found && in < tally(ca))
-              found = equal(fetchasarray(ca, in++), val);
+            for (in = 0; !found && in < tally(ca); in++) {
+              labelList = fetchasarray(ca, in);
+              for (i = 0; !found && i < tally(labelList); i++)
+                found = equal(fetchasarray(labelList, i), val);
+            }
             freeup(apop());  /* remove val */
             exprseqs = get_eseqs(exp);
             if (found)
