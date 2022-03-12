@@ -53,7 +53,9 @@
 #define opsys           " Linux"
 #endif
 
-
+#ifdef FREEBSD
+#define opsys           "FreeBSD"
+#endif
 
 #ifdef OSX
 #define opsys		" Mac OSX"
