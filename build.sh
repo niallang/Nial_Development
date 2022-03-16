@@ -1,8 +1,8 @@
 # script to build nial on linux
 # further information can be found at BuildCore/README.md and BuildNial/README.md
 cd BuildCore
-[ ! -d "build" ] && mkdir build
-rm -r build/*
+mkdir -p build
+rm -rf build/*
 cd build
 cmake ../src
 make
@@ -10,10 +10,10 @@ cp nialcore ../../BuildNial/pkgblder
 cd ../..
 
 cd BuildNial
-[ ! -d "build" ] && mkdir build
-[ ! -d "src" ] && mkdir src
-rm -r build/*
-rm -r src/*
+mkdir -p build
+mkdir -p src
+rm -rf build/*
+rm -rf src/*
 cd pkgblder
 ./nialcore -defs buildfromcore
 cd ../build
