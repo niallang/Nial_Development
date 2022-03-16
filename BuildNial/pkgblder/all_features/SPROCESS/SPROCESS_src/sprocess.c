@@ -35,6 +35,15 @@
 #include <mach/mach_time.h>
 #include <sys/wait.h>
 #endif
+
+#ifdef FREEBSD
+#include <sys/wait.h>
+#include <sys/ioctl.h>
+#include <termios.h>
+#include <libutil.h>
+#include <sys/time.h>
+#endif
+
 #include <sys/socket.h>
 
 /* Standard library header files */
@@ -733,6 +742,9 @@ static double nano_time() {
   } else {
     return (val.tv_sec + val.tv_nsec*1.0e-9);
   }
+#endif
+#ifdef FREEBSD
+  return -1.0;
 #endif
 #ifdef OSX
   /* Time is process time */

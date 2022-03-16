@@ -538,7 +538,7 @@ retry: /* start over point for the main loop */
 	    for (nolines = 0; !isAllWhitespace(inputline); nolines++) {
 	      /* Remove all CTRL chars */
 	      unsigned char *p;
-	      for (p = inputline; *p != 0; p++)
+	      for (p = (unsigned char *)inputline; *p != 0; p++)
 		if (*p < 32)
 		  *p = 32;
 

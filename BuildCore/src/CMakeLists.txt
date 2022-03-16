@@ -34,6 +34,11 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLINUX -DUNIXSYS")
 endif (CMAKE_SYSTEM_NAME MATCHES "Linux")
 
+# FreeBSD specific settings
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+  set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DFREEBSD -DUNIXSYS")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
 # Cygwin specific settings
 if (CMAKE_SYSTEM_NAME MATCHES "CYGWIN")
   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DLINUX -DUNIXSYS")
@@ -90,6 +95,11 @@ set (NIAL_SRCS absmach.c
 if (CMAKE_SYSTEM_NAME MATCHES "Linux")
 	set (NIAL_LIBS m util dl)
 endif (CMAKE_SYSTEM_NAME MATCHES "Linux")
+
+# FreeBSD specific settings
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+	set (NIAL_LIBS m util dl)
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
 # Cygwin specific settings
 if (CMAKE_SYSTEM_NAME MATCHES "CYGWIN")

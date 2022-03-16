@@ -9,6 +9,11 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux")
 	set (NIAL_LIBS m util dl rt)
 endif (CMAKE_SYSTEM_NAME MATCHES "Linux")
 
+# FreeBSD specific settings
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+	set (NIAL_LIBS m util dl)
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
 # Cygwin specific settings
 if (CMAKE_SYSTEM_NAME MATCHES "CYGWIN")
 	set (NIAL_LIBS m util dl rt)
