@@ -1,0 +1,17 @@
+
+# ================================================
+#
+# Additional refcell code in Nial
+#
+# ===============================================
+
+# Allow a function to update the values of a cell
+#
+# _refupdate Fn Cell Data
+#
+
+_refupdate is transformer fn operation Cell Data {
+  Cell _refset ((_refget Cell) fn Data)
+  }
+
+
