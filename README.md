@@ -131,11 +131,8 @@ is the following:
 **Prerequisites:** `gcc` or `clang`, `make` and `cmake`.
 
 The simplest way to run nial is to run `make` from the root directory,
-which will build the `nial` executable, after prompting for additional features.
-
-- `make nialcore` will build core nial alone.
-- `make nialbasic` will build nial basic, which is  required for a custom install.
-- `make nial` will build a custom executable after prompting for your choice.
+which will build the `nialbasic` executable, placing it in the root
+directory. `make nialcore` will build the core nial alone.
 
 Aternatively, if the make recipes do not work, you can manually build Nial.
 

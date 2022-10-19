@@ -1,5 +1,7 @@
 .ONESHELL:
 
+all: nialbasic
+
 setup:
 	make clean
 	mkdir BuildCore/build
