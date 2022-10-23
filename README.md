@@ -128,13 +128,18 @@ is the following:
 
 ## Building Nial
 
+**Prerequisites:** `gcc` or `clang`, `make` and `cmake`.
+
+The simplest way to run nial is to run `make` from the root directory,
+which will build the `nialbasic` executable, placing it in the root
+directory. `make nialcore` will build the core nial alone.
+
+Aternatively, if the make recipes do not work, you can manually build Nial.
+
 The directories BuildCore and BuildNial are used to build versions of
 QNial7. If no existing executable is available for the platform you are
 using then you need to build the nialcore executable using BuildCore. 
 Follow the directions given in the README.md file in BuildCore.
-
-There is a script at [./build.sh](./build.sh) for building Nial if you need to
-build from scratch, and have all the dependencies.
 
 If you are building for a new platform or want to add features to QNial7
 that are not in the executable you have then you use directory BuildNial. 
