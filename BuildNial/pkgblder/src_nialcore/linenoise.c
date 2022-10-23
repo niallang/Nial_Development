@@ -103,6 +103,8 @@
  *
  */
 
+extern void ibye();
+
 #ifdef UNIXSYS
 
 #include <termios.h>
@@ -841,6 +843,8 @@ static int linenoiseEdit(int stdin_fd, int stdout_fd, char *buf, size_t buflen, 
             } else {
                 history_len--;
                 free(history[history_len]);
+		disableRawMode(STDIN_FILENO);
+		ibye();
                 return -1;
             }
             break;

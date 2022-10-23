@@ -297,21 +297,21 @@ main(int argc, char *memin[], char **envp)
       triggered = true;
       nomainloop = false;
       nouserinterrupts = false;
-      keeplog = true;
+      keeplog = false;
       i++;
     }
         
     else if (strlen(memin[i]) == 2 && strcmp(memin[i], "-b") == 0) {
-	/* use pipe input mode */
-	batch_input_mode = true;
-	quiet = true;
-	messages_on = true;
-	debugging_on = true;
-	triggered = true;
-	nomainloop = false;
-	nouserinterrupts = false;
-	keeplog = true;
-	i++;
+      /* use pipe input mode */
+      batch_input_mode = true;
+      quiet = true;
+      messages_on = true;
+      debugging_on = true;
+      triggered = true;
+      nomainloop = false;
+      nouserinterrupts = false;
+      keeplog = true;
+      i++;
     }
         
     else
@@ -538,7 +538,7 @@ retry: /* start over point for the main loop */
 	    for (nolines = 0; !isAllWhitespace(inputline); nolines++) {
 	      /* Remove all CTRL chars */
 	      unsigned char *p;
-	      for (p = inputline; *p != 0; p++)
+	      for (p = (unsigned char *)inputline; *p != 0; p++)
 		if (*p < 32)
 		  *p = 32;
 
